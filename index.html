@@ -1,0 +1,3818 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>XE ĐIỆN KIÊN HUYỀN - Tra cước xe dịch vụ Hà Nam</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f5f3;
+    color: #222;
+}
+
+.container {
+    width: 100%;
+    max-width: 520px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+    background: linear-gradient(135deg, #079447, #16a765);
+    color: white;
+    text-align: center;
+    padding: 25px 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 26px;
+    letter-spacing: 0.3px;
+}
+
+.header p {
+    margin: 8px 0 0;
+    font-size: 15px;
+}
+
+.phone {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.phone strong {
+    font-size: 19px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form {
+    padding: 22px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #087f42;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 7px;
+}
+
+.required {
+    color: #e53935;
+}
+
+.optional {
+    font-size: 12px;
+    color: #888;
+    font-weight: normal;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    background: white;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #0b9950;
+}
+
+.row {
+    display: flex;
+    gap: 12px;
+}
+
+.row > div {
+    flex: 1;
+}
+
+
+/* =====================================================
+   NÚT TÍNH GIÁ
+===================================================== */
+
+.main-button {
+    width: 100%;
+    border: none;
+    background: #079447;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 16px;
+    border-radius: 10px;
+    margin-top: 24px;
+    cursor: pointer;
+}
+
+.main-button:hover {
+    background: #067a3a;
+}
+
+
+/* =====================================================
+   NOTE
+===================================================== */
+
+.note {
+    margin-top: 18px;
+    background: #f5f7f6;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+#result {
+    display: none;
+    padding: 0 22px 25px;
+}
+
+.result-title {
+    font-size: 21px;
+    font-weight: bold;
+    color: #087f42;
+    margin-bottom: 15px;
+}
+
+
+/* =====================================================
+   THÔNG BÁO PHỤ THU
+===================================================== */
+
+.surcharge-notice {
+    display: none;
+    background: #fff1f1;
+    border: 1px solid #ffb3b3;
+    color: #c62828;
+    padding: 12px;
+    border-radius: 9px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   PRICE CARD
+===================================================== */
+
+.price-card {
+    border: 2px solid #ddd;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 15px;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.price-info {
+    width: 68%;
+    min-width: 0;
+}
+
+.price-action {
+    width: 32%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.price-card.recommended {
+    border: 2px solid #079447;
+    background: linear-gradient(145deg, #f0fff7, #ffffff);
+    box-shadow: 0 5px 15px rgba(7,148,71,0.15);
+}
+
+
+/* =====================================================
+   BADGE
+===================================================== */
+
+.badge {
+    display: inline-block;
+    background: #079447;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+.price-card h3 {
+    margin: 3px 0;
+    font-size: 19px;
+}
+
+.price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #e53935;
+    margin: 10px 0;
+}
+
+.trip-info {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #555;
+    margin-top: 5px;
+}
+
+.trip-info span {
+    white-space: nowrap;
+}
+
+.description {
+    font-size: 12px;
+    line-height: 1.55;
+    color: #555;
+    margin-top: 7px;
+}
+
+
+/* =====================================================
+   GIÁ SAU GIẢM
+===================================================== */
+
+.price-discount-box {
+    margin: 8px 0 10px;
+}
+
+.original-price {
+    color: #888;
+    font-size: 14px;
+    text-decoration: line-through;
+    margin-bottom: 2px;
+}
+
+.discount-label {
+    display: inline-block;
+    background: #e53935;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.discounted-price {
+    color: #e53935;
+    font-size: 30px;
+    line-height: 1.1;
+    font-weight: 900;
+    margin: 2px 0 5px;
+}
+
+
+/* =====================================================
+   BUTTON CHỌN GÓI
+===================================================== */
+
+.price-action button {
+    width: 100%;
+    margin: 0;
+    padding: 12px 6px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.price-card:not(.recommended) .price-action button {
+    background: #ff8a00;
+    box-shadow: 0 4px 10px rgba(255,138,0,0.25);
+}
+
+.price-card:not(.recommended) .price-action button:hover {
+    background: #e57700;
+    transform: translateY(-2px);
+}
+
+.price-card.recommended .price-action button {
+    background: #6c4bc4;
+    box-shadow: 0 4px 10px rgba(108,75,196,0.3);
+}
+
+.price-card.recommended .price-action button:hover {
+    background: #5636a5;
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   WARNING
+===================================================== */
+
+.warning {
+    background: #fff7df;
+    border-left: 4px solid #f0ad00;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 7px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   SUCCESS
+===================================================== */
+
+.success {
+    background: #eafff2;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   POPUP GIẢM GIÁ
+===================================================== */
+
+.discount-popup {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 380px;
+    max-width: calc(100% - 30px);
+
+    background: white;
+    border-radius: 20px;
+
+    padding: 26px 24px 24px;
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,0.35),
+        0 0 0 9999px rgba(0,0,0,0.35);
+
+    z-index: 9999;
+
+    display: none;
+
+    border: 3px solid #ff9800;
+
+    animation: popupShow 0.4s ease;
+}
+
+@keyframes popupShow {
+
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+}
+
+
+/* =====================================================
+   CLOSE POPUP
+===================================================== */
+
+.popup-close {
+    position: absolute;
+
+    right: 10px;
+    top: 8px;
+
+    width: 32px;
+    height: 32px;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    color: #777;
+
+    font-size: 25px;
+    line-height: 28px;
+
+    border: none;
+    cursor: pointer;
+}
+
+.popup-close:hover {
+    background: transparent;
+    color: #222;
+}
+
+
+/* =====================================================
+   POPUP TITLE
+===================================================== */
+
+.popup-title {
+    text-align: center;
+    font-size: 21px;
+    font-weight: 900;
+    color: #222;
+
+    margin-bottom: 10px;
+
+    white-space: nowrap;
+}
+
+.popup-title .fifty {
+    color: #e53935;
+    font-size: 32px;
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   POPUP SUBTITLE
+===================================================== */
+
+.popup-subtitle {
+    text-align: center;
+    color: #555;
+    font-size: 15px;
+    margin: 5px 0 16px;
+}
+
+
+/* =====================================================
+   POPUP INPUT
+===================================================== */
+
+.popup-input {
+    width: 100%;
+    margin: 0;
+
+    border: 2px solid #ddd;
+    padding: 14px;
+
+    font-size: 16px;
+}
+
+.popup-input:focus {
+    border-color: #ff9800;
+}
+
+
+/* =====================================================
+   POPUP BUTTON
+===================================================== */
+
+.popup-button {
+    width: 100%;
+
+    margin-top: 12px;
+
+    background: #ff6d00;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 10px;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.popup-button:hover {
+    background: #e65100;
+}
+
+
+/* =====================================================
+   POPUP MESSAGE
+===================================================== */
+
+.popup-message {
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.popup-code {
+    color: #e53935;
+    font-size: 30px;
+    font-weight: 900;
+    margin: 10px 0;
+}
+
+
+/* =====================================================
+   APPLY DISCOUNT
+===================================================== */
+
+.apply-discount-btn {
+    width: 100%;
+
+    background: #079447;
+
+    margin-top: 12px;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.apply-discount-btn:hover {
+    background: #067a3a;
+}
+
+
+/* =====================================================
+   NÚT POPUP THU NHỎ
+===================================================== */
+
+.discount-float {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 9998;
+
+    background: linear-gradient(135deg, #e53935, #ff6d00);
+
+    color: white;
+
+    padding: 13px 18px;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    box-shadow:
+        0 5px 20px rgba(229,57,53,0.4);
+
+    cursor: pointer;
+
+    display: none;
+
+    animation: blinkDiscount 1.5s infinite;
+}
+
+@keyframes blinkDiscount {
+
+    0%, 100% {
+        transform: scale(1);
+        box-shadow:
+            0 5px 20px rgba(229,57,53,0.4);
+    }
+
+    50% {
+        transform: scale(1.06);
+        box-shadow:
+            0 5px 30px rgba(229,57,53,0.7);
+    }
+
+}
+
+
+/* =====================================================
+   POPUP XÁC NHẬN CHỌN GÓI
+===================================================== */
+
+.confirm-popup {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 400px;
+    max-width: calc(100% - 30px);
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 30px 25px 25px;
+
+    z-index: 10000;
+
+    display: none;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,0.35),
+        0 0 0 9999px rgba(0,0,0,0.35);
+
+    animation: confirmPopupShow 0.35s ease;
+}
+
+@keyframes confirmPopupShow {
+
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+}
+
+.confirm-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #eafff2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 34px;
+
+    animation: successPop 0.5s ease;
+}
+
+@keyframes successPop {
+
+    0% {
+        transform: scale(0.5);
+    }
+
+    70% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+.confirm-title {
+    font-size: 21px;
+    font-weight: 900;
+
+    color: #079447;
+
+    margin-bottom: 12px;
+}
+
+.confirm-package {
+    font-size: 18px;
+    font-weight: bold;
+
+    color: #222;
+
+    margin-bottom: 10px;
+}
+
+.confirm-message {
+    font-size: 15px;
+    color: #555;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+.confirm-close {
+    width: 100%;
+
+    border: none;
+
+    background: #079447;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.confirm-close:hover {
+    background: #067a3a;
+}
+
+
+
+
+/* =====================================================
+   FORM ĐẶT XE TRONG POPUP
+===================================================== */
+
+.booking-label {
+    display: block;
+    text-align: left;
+    margin: 12px 0 6px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.booking-input {
+    width: 100%;
+    padding: 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    background: white;
+}
+
+.booking-input:focus {
+    outline: none;
+    border-color: #079447;
+    box-shadow: 0 0 0 3px rgba(7,148,71,0.10);
+}
+
+.booking-error {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fff1f1;
+    color: #c62828;
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: left;
+}
+
+.booking-submit {
+    width: 100%;
+    margin-top: 16px;
+    border: none;
+    background: #079447;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.booking-submit:hover {
+    background: #067a3a;
+}
+
+.booking-submit:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.booking-cancel {
+    width: 100%;
+    margin-top: 9px;
+    border: none;
+    background: transparent;
+    color: #777;
+    font-size: 14px;
+    padding: 9px;
+    cursor: pointer;
+}
+
+.booking-summary {
+    background: #f5f7f6;
+    border-radius: 10px;
+    padding: 11px;
+    margin: 10px 0 4px;
+    color: #444;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+
+
+/* =====================================================
+   UX 2.0 - TIN CẬY, DỄ ĐỌC, TĂNG CHUYỂN ĐỔI
+===================================================== */
+
+.phone-link {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+}
+
+.header-subline {
+    margin-top: 9px;
+    font-size: 13px;
+    opacity: 0.92;
+}
+
+.trust-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #e8eee9;
+    border-bottom: 1px solid #e4e9e6;
+}
+
+.trust-item {
+    background: #fff;
+    padding: 12px 8px;
+    text-align: center;
+    min-width: 0;
+}
+
+.trust-item b {
+    display: block;
+    color: #087f42;
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+.trust-item span {
+    display: block;
+    margin-top: 4px;
+    color: #68736c;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+.booking-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 38px;
+    border-radius: 10px;
+    background: #f1f4f2;
+    color: #6d756f;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.step span {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #dce4df;
+}
+
+.step.active {
+    color: #087f42;
+    background: #eafff2;
+}
+
+.step.active span {
+    background: #079447;
+    color: #fff;
+}
+
+.field-help {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #66706a;
+}
+
+.waiting-help {
+    padding: 9px 10px;
+    border-radius: 8px;
+    background: #eefaf3;
+    color: #087f42;
+}
+
+.result-subtitle {
+    margin: -7px 0 15px;
+    color: #657069;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.main-button,
+.booking-submit,
+.confirm-close,
+.apply-discount-btn {
+    min-height: 50px;
+}
+
+.main-button:active,
+.price-action button:active,
+.booking-submit:active {
+    transform: scale(0.98);
+}
+
+input:invalid:not(:placeholder-shown),
+select:invalid {
+    box-shadow: none;
+}
+
+.inline-call {
+    display: inline-block;
+    margin-top: 10px;
+    color: #087f42;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.mobile-call-bar {
+    display: none;
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 9000;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #079447, #16a765);
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 900;
+    box-shadow: 0 8px 25px rgba(7,148,71,0.35);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .container {
+        margin: 0;
+        border-radius: 0;
+        min-height: 100vh;
+        padding-bottom: 82px;
+    }
+
+    .mobile-call-bar {
+        display: flex;
+    }
+
+    .trust-strip {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .trust-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 8px 10px;
+        border-bottom: 1px solid #edf1ee;
+    }
+
+    .trust-item b,
+    .trust-item span {
+        display: inline;
+        margin: 0;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .form {
+        padding: 18px;
+    }
+
+    #result {
+        padding: 0 18px 25px;
+    }
+
+    .price-card {
+        padding: 13px;
+        gap: 10px;
+    }
+
+    .price-info {
+        width: 67%;
+    }
+
+    .price-action {
+        width: 33%;
+    }
+
+    .price {
+        font-size: 23px;
+    }
+
+    .discounted-price {
+        font-size: 27px;
+    }
+
+    .price-card h3 {
+        font-size: 17px;
+    }
+
+    .trip-info {
+        font-size: 11px;
+    }
+
+    .description {
+        font-size: 11px;
+    }
+
+    .price-action button {
+        font-size: 11px;
+        padding: 11px 4px;
+    }
+
+    .discount-popup {
+        width: calc(100% - 30px);
+        max-width: 390px;
+        padding: 25px 20px 20px;
+    }
+
+    .popup-title {
+        font-size: 18px;
+    }
+
+    .popup-title .fifty {
+        font-size: 29px;
+    }
+
+    .confirm-popup {
+        width: calc(100% - 30px);
+        padding: 28px 20px 22px;
+    }
+
+}
+
+
+/* =====================================================
+   MÀN HÌNH RẤT NHỎ
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .popup-title {
+        font-size: 16px;
+    }
+
+    .popup-title .fifty {
+        font-size: 26px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="header">
+
+    <h1>🚕 TRA CƯỚC TAXI ĐIỆN 🚕</h1>
+
+    <p>Xe dịch vụ Hà Nam</p>
+
+    <a class="phone phone-link" href="tel:0869017368">
+        📞 <strong>0869.017.368</strong>
+    </a>
+
+    <div class="header-subline">
+        Xe mới · Đón trả tận nơi · Báo giá minh bạch
+    </div>
+
+</div>
+
+<div class="trust-strip">
+    <div class="trust-item"><b>🚗 Xe điện sạch</b><span>Êm, thoáng, không mùi</span></div>
+    <div class="trust-item"><b>⏱️ Phản hồi nhanh</b><span>Liên hệ trong 10 phút</span></div>
+    <div class="trust-item"><b>🛡️ Giá rõ ràng</b><span>Xem trước khi đặt</span></div>
+</div>
+
+
+<!-- =====================================================
+     FORM
+===================================================== -->
+
+<div class="form">
+
+    <div class="booking-steps" aria-label="Quy trình đặt xe">
+        <div class="step active" data-step="1"><span>1</span>Nhập chuyến</div>
+        <div class="step" data-step="2"><span>2</span>Xem giá</div>
+        <div class="step" data-step="3"><span>3</span>Đặt xe</div>
+    </div>
+
+    <div class="section-title">
+        📋 Nhập thông tin chuyến đi
+    </div>
+
+
+    <label>
+        Điểm đón
+        <span class="optional">(không bắt buộc)</span>
+    </label>
+
+    <input
+        type="text"
+        id="pickup"
+        placeholder="Ví dụ: Lý Nhân, Hà Nam"
+    >
+
+
+    <label>
+        Điểm đến
+        <span class="optional">(không bắt buộc)</span>
+    </label>
+
+    <input
+        type="text"
+        id="destination"
+        placeholder="Ví dụ: Hà Nội"
+    >
+
+
+    <div class="row">
+
+        <div>
+
+            <label>
+                Số người <span class="required">*</span>
+            </label>
+
+            <select id="passengers">
+
+                <option value="">
+                    -- Chọn số người --
+                </option>
+
+                <option value="1">1 người</option>
+                <option value="2">2 người</option>
+                <option value="3">3 người</option>
+                <option value="4">4 người</option>
+                <option value="5">5 người</option>
+                <option value="6">6 người</option>
+
+            </select>
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Loại chuyến <span class="required">*</span>
+            </label>
+
+            <select id="tripType">
+
+                <option value="">
+                    -- Chọn --
+                </option>
+
+                <option value="oneway">
+                    1 chiều
+                </option>
+
+                <option value="roundtrip">
+                    2 chiều
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <label>
+        Thời gian đi <span class="required">*</span>
+    </label>
+
+    <select id="timeType">
+
+        <option value="">
+            -- Chọn ban ngày / ban đêm --
+        </option>
+
+        <option value="day">
+            ☀️ Đi ban ngày
+        </option>
+
+        <option value="night">
+            🌙 Đi ban đêm (+50.000đ/chuyến)
+        </option>
+
+    </select>
+
+
+    <label>
+        Ngày đi <span class="required">*</span>
+    </label>
+
+    <input
+        type="date"
+        id="travelDate"
+    >
+
+
+    <label>
+        Quãng đường (km) <span class="required">*</span>
+    </label>
+
+    <input
+        type="number"
+        id="km"
+        min="1"
+        placeholder="Nhập tổng quãng đường"
+    >
+
+
+    <div id="waitingSection">
+
+        <label>
+            Thời gian chờ <span class="required">*</span>
+        </label>
+
+        <select id="waiting">
+
+            <option value="">
+                -- Chọn thời gian chờ --
+            </option>
+
+            <option value="0">
+                Không chờ
+            </option>
+
+            <option value="1">
+                Chờ 1 tiếng (miễn phí)
+            </option>
+
+            <option value="2">
+                Chờ 2 tiếng (miễn phí)
+            </option>
+
+            <option value="3">
+                Chờ 3 tiếng (miễn phí)
+            </option>
+
+            <option value="4">
+                Chờ 4 tiếng (+50.000đ)
+            </option>
+
+            <option value="5">
+                Chờ 5 tiếng (+100.000đ)
+            </option>
+
+            <option value="6">
+                Chờ 6 tiếng (+150.000đ)
+            </option>
+
+            <option value="7">
+                Chờ 7 tiếng (+200.000đ)
+            </option>
+
+            <option value="8">
+                Chờ 8 tiếng (+250.000đ)
+            </option>
+
+        </select>
+
+        <div class="field-help waiting-help">
+            🎁 Miễn phí 03 tiếng chờ đầu tiên. Từ tiếng thứ 4 tính 50.000đ/tiếng.
+        </div>
+
+    </div>
+
+
+    <button
+        class="main-button"
+        onclick="calculatePrice()"
+    >
+        🧮 XEM GIÁ THAM KHẢO
+    </button>
+
+
+    <div class="note">
+
+        💡 Giá cước hiển thị là giá tham khảo.
+
+        Giá đã bao gồm các phụ thu được lựa chọn
+        trong thông tin chuyến đi.
+
+        <br><br>
+
+        🎁 Miễn phí 03 tiếng chờ đầu tiên; từ tiếng thứ 4 tính 50.000đ/tiếng.
+
+        <br><br>
+
+        🚧 Phí cầu đường và phí đón sân bay
+        phát sinh theo thực tế.
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     KẾT QUẢ
+===================================================== -->
+
+<div id="result">
+
+    <div class="result-title">
+        💰 Giá cước dự kiến
+    </div>
+
+    <div class="result-subtitle">
+        Chọn gói phù hợp, nhập số điện thoại và nhân viên sẽ xác nhận trong 10 phút.
+    </div>
+
+
+    <div
+        id="surchargeNotice"
+        class="surcharge-notice"
+    ></div>
+
+
+    <div id="price5"></div>
+
+
+    <div id="price7"></div>
+
+
+    <div
+        id="warningBox"
+        class="warning"
+    ></div>
+
+
+    <div class="success">
+
+        <b>✅ Không cần thanh toán trước.</b><br>
+        Nhân viên sẽ gọi xác nhận lịch trình và giá cuối cùng.
+
+        <a class="inline-call" href="tel:0869017368">
+            📞 Gọi ngay 0869.017.368
+        </a>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     POPUP GIẢM GIÁ
+===================================================== -->
+
+<div
+    id="discountPopup"
+    class="discount-popup"
+>
+
+    <button
+        class="popup-close"
+        onclick="closeDiscountPopup()"
+    >
+        ×
+    </button>
+
+
+    <div id="phoneForm">
+
+        <div class="popup-title">
+
+            🎁 GIẢM đến
+            <span class="fifty">50%</span>
+            giá cước
+
+        </div>
+
+
+        <div class="popup-subtitle">
+
+            Nhập SĐT để nhận mã
+
+        </div>
+
+
+        <input
+            type="tel"
+            id="discountPhone"
+            class="popup-input"
+            maxlength="10"
+            inputmode="numeric"
+            placeholder="Nhập số điện thoại"
+        >
+
+
+        <button
+            class="popup-button"
+            onclick="getDiscountCode()"
+        >
+
+            NHẬN MÃ GIẢM GIÁ
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="discountCodeResult"
+        class="popup-message"
+        style="display:none;"
+    >
+
+        🎉 Bạn nhận được mã giảm
+
+        <div class="popup-code">
+
+            <span id="discountPercent"></span>%
+
+        </div>
+
+
+        <button
+            class="apply-discount-btn"
+            onclick="applyDiscount()"
+        >
+
+            ÁP MÃ GIẢM GIÁ
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     NÚT THU NHỎ
+===================================================== -->
+
+<div
+    id="discountFloat"
+    class="discount-float"
+    onclick="openDiscountPopup()"
+>
+
+    🎁 GIẢM TỚI 50%
+
+</div>
+
+
+<!-- =====================================================
+     POPUP XÁC NHẬN ĐẶT XE
+===================================================== -->
+
+<div
+    id="confirmPopup"
+    class="confirm-popup"
+>
+
+    <!-- FORM XÁC NHẬN -->
+
+    <div id="bookingForm">
+
+        <div class="confirm-icon">
+            🚕
+        </div>
+
+        <div class="confirm-title">
+            Xác nhận đặt xe
+        </div>
+
+        <div
+            id="confirmPackage"
+            class="confirm-package"
+        ></div>
+
+        <div
+            id="bookingPriceSummary"
+            class="booking-summary"
+        ></div>
+
+        <label
+            class="booking-label"
+            for="bookingName"
+        >
+            Tên khách
+            <span class="optional">(không bắt buộc)</span>
+        </label>
+
+        <input
+            type="text"
+            id="bookingName"
+            class="booking-input"
+            placeholder="Nhập tên của bạn"
+        >
+
+        <label
+            class="booking-label"
+            for="bookingPhone"
+        >
+            Số điện thoại <span class="required">*</span>
+        </label>
+
+        <input
+            type="tel"
+            id="bookingPhone"
+            class="booking-input"
+            maxlength="10"
+            inputmode="numeric"
+            autocomplete="tel"
+            placeholder="Ví dụ: 0869017368"
+        >
+
+        <div
+            id="bookingError"
+            class="booking-error"
+        ></div>
+
+        <button
+            id="bookingSubmitButton"
+            class="booking-submit"
+            onclick="submitBooking()"
+        >
+            XÁC NHẬN ĐẶT XE
+        </button>
+
+        <button
+            class="booking-cancel"
+            onclick="closeConfirmPopup()"
+        >
+            Để sau
+        </button>
+
+    </div>
+
+
+    <!-- THÔNG BÁO THÀNH CÔNG -->
+
+    <div
+        id="bookingSuccess"
+        style="display:none;"
+    >
+
+        <div class="confirm-icon">
+            ✓
+        </div>
+
+        <div class="confirm-title">
+            Đặt xe thành công!
+        </div>
+
+        <div
+            id="bookingSuccessPackage"
+            class="confirm-package"
+        ></div>
+
+        <div class="confirm-message">
+
+            Thông tin của bạn đã được tiếp nhận.<br>
+
+            Nhân viên sẽ liên hệ xác nhận
+            trong vòng <b>10 phút nữa</b>.
+
+        </div>
+
+        <button
+            class="confirm-close"
+            onclick="closeConfirmPopup()"
+        >
+            ĐÃ HIỂU
+        </button>
+
+    </div>
+
+</div>
+
+<a class="mobile-call-bar" href="tel:0869017368">
+    📞 GỌI ĐẶT XE: 0869.017.368
+</a>
+
+<script>
+
+
+/* =====================================================
+   BIẾN
+===================================================== */
+
+let currentPrice5 = 0;
+let currentPrice7 = 0;
+
+let currentDiscount = 0;
+
+let popupTimer = null;
+
+/* Đường dẫn Google Apps Script nhận thông tin đặt xe */
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbzZaZiAScrjXkRJzKtnduMK-QzMRFLJ59nhc0CBk_8G2SRA_1FMFItRzc1p3WoMzYj5pw/exec";
+
+let selectedPackageName = "";
+let selectedPackagePrice = 0;
+let isSubmittingBooking = false;
+
+
+/* =====================================================
+   LÀM TRÒN GIÁ
+===================================================== */
+
+function roundPrice(price) {
+
+    return Math.round(price / 10) * 10;
+
+}
+
+
+/* =====================================================
+   ĐỊNH DẠNG TIỀN
+===================================================== */
+
+function formatPrice(price) {
+
+    return Math.round(price)
+        .toLocaleString("vi-VN") + "đ";
+
+}
+
+
+/* =====================================================
+   CẬP NHẬT TIẾN TRÌNH ĐẶT XE
+===================================================== */
+
+function setActiveStep(stepNumber) {
+
+    const steps = document.querySelectorAll(
+        ".booking-steps .step"
+    );
+
+    steps.forEach(function(step) {
+
+        const number = Number(step.dataset.step);
+
+        step.classList.toggle(
+            "active",
+            number === stepNumber
+        );
+
+        step.classList.toggle(
+            "completed",
+            number < stepNumber
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   HIỆN POPUP XÁC NHẬN ĐẶT XE
+===================================================== */
+
+function showConfirmPopup(packageName) {
+
+    setActiveStep(3);
+
+    selectedPackageName =
+        packageName;
+
+    const isFiveSeat =
+        packageName.toLowerCase().includes("5");
+
+    const originalPrice =
+        isFiveSeat
+        ? currentPrice5
+        : currentPrice7;
+
+    selectedPackagePrice =
+        originalPrice > 0 && currentDiscount > 0
+        ? roundPrice(
+            originalPrice *
+            (
+                1 -
+                currentDiscount / 100
+            )
+        )
+        : originalPrice;
+
+
+    document.getElementById(
+        "confirmPackage"
+    ).innerHTML =
+        "🚗 Bạn đang chọn <b>" +
+        packageName +
+        "</b>";
+
+
+    document.getElementById(
+        "bookingPriceSummary"
+    ).innerHTML =
+        selectedPackagePrice > 0
+        ? (
+            "Giá dự kiến: <b>" +
+            formatPrice(selectedPackagePrice) +
+            "</b>" +
+            (
+                currentDiscount > 0
+                ? " · Đã áp mã giảm " +
+                  currentDiscount +
+                  "%"
+                : ""
+            )
+        )
+        : "Giá dự kiến: <b>Báo giá riêng</b>";
+
+
+    const discountPhone =
+        document.getElementById(
+            "discountPhone"
+        ).value.trim();
+
+
+    document.getElementById(
+        "bookingPhone"
+    ).value =
+        isValidPhone(discountPhone)
+        ? discountPhone
+        : "";
+
+
+    document.getElementById(
+        "bookingError"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "bookingForm"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "bookingSuccess"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "confirmPopup"
+    ).style.display =
+        "block";
+
+
+    setTimeout(function() {
+
+        document.getElementById(
+            "bookingPhone"
+        ).focus();
+
+    }, 150);
+
+}
+
+
+/* =====================================================
+   ĐÓNG POPUP XÁC NHẬN
+===================================================== */
+
+function closeConfirmPopup() {
+
+    if (isSubmittingBooking) {
+
+        return;
+
+    }
+
+    document.getElementById(
+        "confirmPopup"
+    ).style.display =
+        "none";
+
+    setActiveStep(2);
+
+}
+
+
+/* =====================================================
+   TẠO MÃ YÊU CẦU ĐỂ CHỐNG GỬI TRÙNG
+===================================================== */
+
+function createClientRequestId() {
+
+    if (window.crypto && crypto.randomUUID) {
+
+        return crypto.randomUUID();
+
+    }
+
+    return "WEB-" + Date.now() + "-" +
+        Math.random().toString(36).slice(2, 10);
+
+}
+
+
+/* =====================================================
+   GỬI THÔNG TIN ĐẶT XE VỀ GOOGLE SHEET
+===================================================== */
+
+async function submitBooking() {
+
+    if (isSubmittingBooking) {
+
+        return;
+
+    }
+
+
+    const phoneInput =
+        document.getElementById(
+            "bookingPhone"
+        );
+
+    const nameInput =
+        document.getElementById(
+            "bookingName"
+        );
+
+    const errorBox =
+        document.getElementById(
+            "bookingError"
+        );
+
+    const submitButton =
+        document.getElementById(
+            "bookingSubmitButton"
+        );
+
+    const phone =
+        phoneInput.value
+        .replace(/\D/g, "")
+        .trim();
+
+
+    phoneInput.value =
+        phone;
+
+
+    if (!isValidPhone(phone)) {
+
+        errorBox.innerText =
+            "Vui lòng nhập đúng số điện thoại gồm 10 số và bắt đầu bằng số 0.";
+
+        errorBox.style.display =
+            "block";
+
+        phoneInput.focus();
+
+        return;
+
+    }
+
+
+    const tripTypeValue =
+        document.getElementById(
+            "tripType"
+        ).value;
+
+    const timeTypeValue =
+        document.getElementById(
+            "timeType"
+        ).value;
+
+    const waitingValue =
+        tripTypeValue === "oneway"
+        ? "0"
+        : document.getElementById(
+            "waiting"
+        ).value;
+
+
+    const bookingData = {
+
+        name:
+            nameInput.value.trim(),
+
+        phone:
+            phone,
+
+        pickup:
+            document.getElementById(
+                "pickup"
+            ).value.trim(),
+
+        destination:
+            document.getElementById(
+                "destination"
+            ).value.trim(),
+
+        passengers:
+            document.getElementById(
+                "passengers"
+            ).value,
+
+        tripType:
+            tripTypeValue === "roundtrip"
+            ? "2 chiều"
+            : "1 chiều",
+
+        timeType:
+            timeTypeValue === "night"
+            ? "Ban đêm"
+            : "Ban ngày",
+
+        travelDate:
+            document.getElementById(
+                "travelDate"
+            ).value,
+
+        km:
+            document.getElementById(
+                "km"
+            ).value,
+
+        waiting:
+            waitingValue,
+
+        packageName:
+            selectedPackageName,
+
+        price:
+            selectedPackagePrice > 0
+            ? formatPrice(
+                selectedPackagePrice
+            )
+            : "Báo giá riêng",
+
+        discount:
+            currentDiscount > 0
+            ? currentDiscount + "%"
+            : "Không áp dụng",
+
+        source:
+            "Website tra cước",
+
+        clientRequestId:
+            sessionStorage.getItem("currentClientRequestId") ||
+            createClientRequestId(),
+
+        submittedAt:
+            new Date().toISOString()
+    };
+
+
+    sessionStorage.setItem(
+        "currentClientRequestId",
+        bookingData.clientRequestId
+    );
+
+
+    /*
+       Chặn bấm gửi trùng cùng một đơn
+       trong khoảng 60 giây.
+    */
+
+    const bookingKey =
+        [
+            bookingData.phone,
+            bookingData.travelDate,
+            bookingData.km,
+            bookingData.packageName,
+            bookingData.price
+        ].join("|");
+
+    const lastBookingKey =
+        sessionStorage.getItem(
+            "lastBookingKey"
+        );
+
+    const lastBookingTime =
+        Number(
+            sessionStorage.getItem(
+                "lastBookingTime"
+            ) || 0
+        );
+
+
+    if (
+        lastBookingKey === bookingKey &&
+        Date.now() - lastBookingTime < 60000
+    ) {
+
+        showBookingSuccess();
+
+        return;
+
+    }
+
+
+    isSubmittingBooking =
+        true;
+
+    errorBox.style.display =
+        "none";
+
+    submitButton.disabled =
+        true;
+
+    submitButton.innerText =
+        "ĐANG GỬI...";
+
+
+    try {
+
+        /*
+           no-cors giúp website gửi dữ liệu ổn định tới
+           Google Apps Script từ các tên miền khác nhau.
+           Phản hồi sẽ ở dạng opaque, nhưng dữ liệu POST
+           vẫn được Apps Script tiếp nhận.
+        */
+
+        await fetch(
+            GOOGLE_SCRIPT_URL,
+            {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+                body:
+                    JSON.stringify(
+                        bookingData
+                    )
+            }
+        );
+
+
+        sessionStorage.setItem(
+            "lastBookingKey",
+            bookingKey
+        );
+
+        sessionStorage.setItem(
+            "lastBookingTime",
+            String(Date.now())
+        );
+
+        sessionStorage.removeItem(
+            "currentClientRequestId"
+        );
+
+
+        showBookingSuccess();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Lỗi gửi thông tin đặt xe:",
+            error
+        );
+
+        errorBox.innerHTML =
+            "Chưa gửi được thông tin. " +
+            "Vui lòng kiểm tra mạng rồi thử lại, " +
+            "hoặc gọi <b>0869.017.368</b>.";
+
+        errorBox.style.display =
+            "block";
+
+    }
+
+    finally {
+
+        isSubmittingBooking =
+            false;
+
+        submitButton.disabled =
+            false;
+
+        submitButton.innerText =
+            "XÁC NHẬN ĐẶT XE";
+
+    }
+
+}
+
+
+/* =====================================================
+   HIỂN THỊ ĐẶT XE THÀNH CÔNG
+===================================================== */
+
+function showBookingSuccess() {
+
+    document.getElementById(
+        "bookingSuccessPackage"
+    ).innerHTML =
+        "Bạn đã chọn <b>" +
+        selectedPackageName +
+        "</b>";
+
+
+    document.getElementById(
+        "bookingForm"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "bookingSuccess"
+    ).style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   HIỆN / ẨN THỜI GIAN CHỜ
+===================================================== */
+
+document
+    .getElementById("tripType")
+    .addEventListener("change", function() {
+
+        const waitingSection =
+            document.getElementById(
+                "waitingSection"
+            );
+
+        const waiting =
+            document.getElementById(
+                "waiting"
+            );
+
+
+        if (this.value === "oneway") {
+
+            waitingSection.style.display =
+                "none";
+
+            waiting.value =
+                "0";
+
+        }
+
+        else if (this.value === "roundtrip") {
+
+            waitingSection.style.display =
+                "block";
+
+            waiting.value =
+                "";
+
+        }
+
+        else {
+
+            waitingSection.style.display =
+                "block";
+
+            waiting.value =
+                "";
+
+        }
+
+    });
+
+
+/* =====================================================
+   GIÁ THEO KM
+===================================================== */
+
+function getPricePerKm(km) {
+
+    let oldPrice;
+
+
+    if (km <= 7) {
+
+        return 100000 * 1.15;
+
+    }
+
+    if (km <= 15) {
+
+        oldPrice = 12000;
+
+    }
+
+    else if (km <= 30) {
+
+        oldPrice = 11000;
+
+    }
+
+    else if (km <= 60) {
+
+        oldPrice = 10500;
+
+    }
+
+    else if (km <= 90) {
+
+        oldPrice = 10000;
+
+    }
+
+    else if (km <= 130) {
+
+        oldPrice = 9500;
+
+    }
+
+    else if (km <= 200) {
+
+        oldPrice = 9000;
+
+    }
+
+    else {
+
+        oldPrice = 8500;
+
+    }
+
+    return oldPrice * 1.15;
+
+}
+
+
+/* =====================================================
+   GIẢM GIÁ CHIỀU VỀ
+===================================================== */
+
+function getReturnDiscount(km) {
+
+    if (km <= 15) {
+
+        return 0;
+
+    }
+
+    if (km <= 30) {
+
+        return 15;
+
+    }
+
+    if (km <= 60) {
+
+        return 25;
+
+    }
+
+    if (km <= 90) {
+
+        return 30;
+
+    }
+
+    if (km <= 130) {
+
+        return 50;
+
+    }
+
+    if (km <= 200) {
+
+        return 55;
+
+    }
+
+    return null;
+
+}
+
+
+/* =====================================================
+   PHÍ CHỜ
+===================================================== */
+
+function getWaitingFee(km, waiting) {
+
+    /*
+       Miễn phí 03 tiếng chờ đầu tiên.
+       Từ tiếng thứ 4 tính 50.000đ/tiếng.
+    */
+
+    if (waiting <= 3) {
+
+        return 0;
+
+    }
+
+    const chargeableHours =
+        waiting - 3;
+
+    return chargeableHours * 50000;
+
+}
+
+
+/* =====================================================
+   NGÀY TẾT ÂM LỊCH
+===================================================== */
+
+const lunarTetDates = {
+
+    2026: {
+        tet29: "2026-02-16",
+        tet30: "2026-02-17",
+        mung1: "2026-02-18",
+        mung2: "2026-02-19",
+        mung3: "2026-02-20",
+        mung4: "2026-02-21",
+        mung5: "2026-02-22"
+    },
+
+    2027: {
+        tet29: "2027-02-05",
+        tet30: "2027-02-06",
+        mung1: "2027-02-07",
+        mung2: "2027-02-08",
+        mung3: "2027-02-09",
+        mung4: "2027-02-10",
+        mung5: "2027-02-11"
+    },
+
+    2028: {
+        tet29: "2028-01-25",
+        tet30: null,
+        mung1: "2028-01-26",
+        mung2: "2028-01-27",
+        mung3: "2028-01-28",
+        mung4: "2028-01-29",
+        mung5: "2028-01-30"
+    },
+
+    2029: {
+        tet29: "2029-02-12",
+        tet30: "2029-02-13",
+        mung1: "2029-02-14",
+        mung2: "2029-02-15",
+        mung3: "2029-02-16",
+        mung4: "2029-02-17",
+        mung5: "2029-02-18"
+    },
+
+    2030: {
+        tet29: "2030-02-02",
+        tet30: "2030-02-03",
+        mung1: "2030-02-04",
+        mung2: "2030-02-05",
+        mung3: "2030-02-06",
+        mung4: "2030-02-07",
+        mung5: "2030-02-08"
+    }
+
+};
+
+
+/* =====================================================
+   GIỖ TỔ
+===================================================== */
+
+const gioToDates = {
+
+    2026: "2026-04-26",
+    2027: "2027-04-16",
+    2028: "2028-04-06",
+    2029: "2029-04-25",
+    2030: "2030-04-15"
+
+};
+
+
+/* =====================================================
+   PHỤ THU NGÀY
+===================================================== */
+
+function getDateSurcharge(dateString) {
+
+    if (!dateString) {
+
+        return {
+            percent: 0,
+            label: "Ngày thường"
+        };
+
+    }
+
+
+    const date =
+        new Date(
+            dateString + "T00:00:00"
+        );
+
+
+    const year =
+        date.getFullYear();
+
+    const month =
+        date.getMonth() + 1;
+
+    const day =
+        date.getDate();
+
+
+    if (month === 1 && day === 1) {
+
+        return {
+            percent: 20,
+            label: "Tết Dương lịch 1/1"
+        };
+
+    }
+
+
+    if (month === 4 && day === 30) {
+
+        return {
+            percent: 20,
+            label: "Ngày 30/4"
+        };
+
+    }
+
+
+    if (month === 5 && day === 1) {
+
+        return {
+            percent: 20,
+            label: "Ngày Quốc tế Lao động 1/5"
+        };
+
+    }
+
+
+    if (month === 9 && day === 2) {
+
+        return {
+            percent: 20,
+            label: "Quốc khánh 2/9"
+        };
+
+    }
+
+
+    if (
+        gioToDates[year] &&
+        dateString === gioToDates[year]
+    ) {
+
+        return {
+            percent: 20,
+            label: "Giỗ Tổ Hùng Vương"
+        };
+
+    }
+
+
+    const tet =
+        lunarTetDates[year];
+
+
+    if (tet) {
+
+        if (
+            tet.tet29 &&
+            dateString === tet.tet29
+        ) {
+
+            return {
+                percent: 50,
+                label: "29 Tết"
+            };
+
+        }
+
+
+        if (
+            tet.tet30 &&
+            dateString === tet.tet30
+        ) {
+
+            return {
+                percent: 50,
+                label: "30 Tết"
+            };
+
+        }
+
+
+        if (
+            dateString === tet.mung1 ||
+            dateString === tet.mung2 ||
+            dateString === tet.mung3
+        ) {
+
+            return {
+                percent: 50,
+                label: "Mùng 1–3 Tết"
+            };
+
+        }
+
+
+        if (
+            dateString === tet.mung4 ||
+            dateString === tet.mung5
+        ) {
+
+            return {
+                percent: 30,
+                label: "Mùng 4–5 Tết"
+            };
+
+        }
+
+
+        if (tet.tet29) {
+
+            const tet29Date =
+                new Date(
+                    tet.tet29 +
+                    "T00:00:00"
+                );
+
+
+            const diffDays =
+                Math.round(
+                    (
+                        tet29Date -
+                        date
+                    )
+                    /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            if (
+                diffDays === 1 ||
+                diffDays === 2
+            ) {
+
+                return {
+                    percent: 30,
+                    label: "27–28 Tết"
+                };
+
+            }
+
+        }
+
+    }
+
+
+    return {
+        percent: 0,
+        label: "Ngày thường"
+    };
+
+}
+
+
+/* =====================================================
+   WARNING
+===================================================== */
+
+function updateWarning(
+    tripType,
+    surchargeInfo
+) {
+
+    let warningContent = `
+
+        🚧 <b>Lưu ý:</b><br>
+
+        • Phí cầu đường phát sinh theo thực tế.<br>
+
+        • Phí đón sân bay phát sinh theo thực tế.<br>
+
+        • Miễn phí <b>03 tiếng chờ đầu tiên</b>;
+        từ tiếng thứ 4 tính <b>50.000đ/tiếng</b>.
+
+    `;
+
+
+    if (
+        surchargeInfo.percent > 0
+    ) {
+
+        warningContent += `
+
+            <br>
+
+            • Ngày đi
+            <b>${surchargeInfo.label}</b>
+            áp dụng phụ thu
+            <b>+${surchargeInfo.percent}%</b>
+            cước xe.
+
+        `;
+
+    }
+
+
+    if (
+        tripType === "roundtrip"
+    ) {
+
+        warningContent += `
+
+            <br>
+
+            • Giá 2 chiều áp dụng khi đi và về
+            trong cùng ngày.<br>
+
+            • Nếu khác ngày, vui lòng liên hệ
+            để được báo giá riêng hoặc tính thành 2 chuyến.<br>
+
+            • Ở qua đêm:
+            phí lưu xe <b>400.000đ/đêm</b>.
+
+        `;
+
+    }
+
+
+    document.getElementById(
+        "warningBox"
+    ).innerHTML =
+        warningContent;
+
+}
+
+
+/* =====================================================
+   KIỂM TRA SĐT
+===================================================== */
+
+function isValidPhone(phone) {
+
+    return /^0\d{9}$/.test(phone);
+
+}
+
+
+/* =====================================================
+   RANDOM MÃ GIẢM
+===================================================== */
+
+function generateDiscount() {
+
+    const random =
+        Math.random() * 100;
+
+
+    if (random < 10) return 10;
+
+    if (random < 20) return 11;
+
+    if (random < 30) return 12;
+
+    if (random < 40) return 13;
+
+    if (random < 50) return 14;
+
+    return 15;
+
+}
+
+
+/* =====================================================
+   POPUP SAU 5 GIÂY
+===================================================== */
+
+function startDiscountPopupTimer() {
+
+    clearTimeout(popupTimer);
+
+
+    popupTimer =
+        setTimeout(
+            function() {
+
+                const popup =
+                    document.getElementById(
+                        "discountPopup"
+                    );
+
+
+                if (
+                    currentDiscount === 0 &&
+                    popup.style.display !== "block"
+                ) {
+
+                    popup.style.display =
+                        "block";
+
+                }
+
+            },
+            5000
+        );
+
+}
+
+
+/* =====================================================
+   ĐÓNG POPUP GIẢM GIÁ
+===================================================== */
+
+function closeDiscountPopup() {
+
+    document.getElementById(
+        "discountPopup"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "discountFloat"
+    ).style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   MỞ POPUP GIẢM GIÁ
+===================================================== */
+
+function openDiscountPopup() {
+
+    document.getElementById(
+        "discountPopup"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "discountFloat"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   NHẬN MÃ
+===================================================== */
+
+function getDiscountCode() {
+
+    const phone =
+        document.getElementById(
+            "discountPhone"
+        )
+        .value
+        .trim();
+
+
+    if (
+        !isValidPhone(phone)
+    ) {
+
+        alert(
+            "Vui lòng nhập đúng số điện thoại 10 số, bắt đầu bằng số 0."
+        );
+
+        return;
+
+    }
+
+
+    currentDiscount =
+        generateDiscount();
+
+
+    document.getElementById(
+        "discountPercent"
+    ).innerText =
+        currentDiscount;
+
+
+    document.getElementById(
+        "phoneForm"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "discountCodeResult"
+    ).style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   ÁP MÃ GIẢM GIÁ
+===================================================== */
+
+function applyDiscount() {
+
+    if (
+        currentDiscount <= 0
+    ) {
+
+        return;
+
+    }
+
+
+    const newPrice5 =
+        roundPrice(
+            currentPrice5 *
+            (
+                1 -
+                currentDiscount / 100
+            )
+        );
+
+
+    const newPrice7 =
+        roundPrice(
+            currentPrice7 *
+            (
+                1 -
+                currentDiscount / 100
+            )
+        );
+
+
+    if (
+        currentPrice5 > 0
+    ) {
+
+        const price5 =
+            document.querySelector(
+                "#price5 .price"
+            );
+
+
+        if (price5) {
+
+            price5.innerHTML = `
+
+                <div class="price-discount-box">
+
+                    <div class="discount-label">
+
+                        🎉 GIẢM ${currentDiscount}%
+
+                    </div>
+
+                    <div class="original-price">
+
+                        ${formatPrice(currentPrice5)}
+
+                    </div>
+
+                    <div class="discounted-price">
+
+                        ${formatPrice(newPrice5)}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    const price7 =
+        document.querySelector(
+            "#price7 .price"
+        );
+
+
+    if (price7) {
+
+        price7.innerHTML = `
+
+            <div class="price-discount-box">
+
+                <div class="discount-label">
+
+                    🎉 GIẢM ${currentDiscount}%
+
+                </div>
+
+                <div class="original-price">
+
+                    ${formatPrice(currentPrice7)}
+
+                </div>
+
+                <div class="discounted-price">
+
+                    ${formatPrice(newPrice7)}
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    document.getElementById(
+        "discountPopup"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "discountFloat"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "result"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
+
+
+/* =====================================================
+   TÍNH GIÁ
+===================================================== */
+
+function calculatePrice() {
+
+
+    const passengers =
+        document.getElementById(
+            "passengers"
+        ).value;
+
+
+    const tripType =
+        document.getElementById(
+            "tripType"
+        ).value;
+
+
+    const timeType =
+        document.getElementById(
+            "timeType"
+        ).value;
+
+
+    const travelDate =
+        document.getElementById(
+            "travelDate"
+        ).value;
+
+
+    const km =
+        Number(
+            document.getElementById(
+                "km"
+            ).value
+        );
+
+
+    const waitingValue =
+        document.getElementById(
+            "waiting"
+        ).value;
+
+
+    let waiting;
+
+
+    if (
+        tripType === "oneway"
+    ) {
+
+        waiting = 0;
+
+    }
+
+    else {
+
+        waiting =
+            Number(waitingValue);
+
+    }
+
+
+    if (!passengers) {
+
+        alert(
+            "Bạn đi mấy người?"
+        );
+
+        return;
+
+    }
+
+
+    if (!tripType) {
+
+        alert(
+            "Bạn đi 1 chiều hay 2 chiều?"
+        );
+
+        return;
+
+    }
+
+
+    if (!timeType) {
+
+        alert(
+            "Bạn đi ban ngày hay ban đêm?"
+        );
+
+        return;
+
+    }
+
+
+    if (!travelDate) {
+
+        alert(
+            "Vui lòng chọn ngày đi."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !km ||
+        km <= 0
+    ) {
+
+        alert(
+            "Vui lòng nhập quãng đường."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        tripType === "roundtrip" &&
+        waitingValue === ""
+    ) {
+
+        alert(
+            "Vui lòng chọn thời gian chờ."
+        );
+
+        return;
+
+    }
+
+
+    const tripText =
+        tripType === "roundtrip"
+        ? "2 chiều"
+        : "1 chiều";
+
+
+    const timeText =
+        timeType === "night"
+        ? "🌙 Ban đêm"
+        : "☀️ Ban ngày";
+
+
+    const waitingText =
+        tripType === "oneway"
+        ? "Không chờ"
+        : (
+            waiting === 0
+            ? "Không chờ"
+            : "Chờ " +
+              waiting +
+              " tiếng"
+        );
+
+
+    const tripInfo = `
+
+        <span>${passengers} người</span> ·
+
+        <span>${km}km</span> ·
+
+        <span>${tripText}</span> ·
+
+        <span>${waitingText}</span> ·
+
+        <span>${timeText}</span>
+
+    `;
+
+
+    const surchargeInfo =
+        getDateSurcharge(
+            travelDate
+        );
+
+
+    updateWarning(
+        tripType,
+        surchargeInfo
+    );
+
+
+    /* =================================================
+       TRÊN 200KM
+    ================================================= */
+
+    if (
+        km > 200
+    ) {
+
+        /*
+           Tránh giữ lại giá của lần tính trước.
+        */
+
+        currentPrice5 = 0;
+        currentPrice7 = 0;
+        currentDiscount = 0;
+
+        setActiveStep(2);
+
+        document.getElementById(
+            "result"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "surchargeNotice"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "price5"
+        ).innerHTML =
+            passengers <= 4
+            ? `
+
+                <div class="price-card">
+
+                    <div class="price-info">
+
+                        <span class="badge">
+                            💰 TIẾT KIỆM
+                        </span>
+
+                        <h3>
+                            🚗 Gói 5 chỗ
+                        </h3>
+
+                        <div class="price">
+                            Báo giá riêng
+                        </div>
+
+                        <div class="trip-info">
+                            ${tripInfo}
+                        </div>
+
+                        <div class="description">
+
+                            Quãng đường trên 200km.
+                            Vui lòng liên hệ để được báo giá riêng.
+
+                        </div>
+
+                    </div>
+
+                    <div class="price-action">
+
+                        <button
+                            onclick="showConfirmPopup('Gói 5 chỗ')"
+                        >
+
+                            CHỌN GÓI NÀY
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `
+            : "";
+
+
+        document.getElementById(
+            "price7"
+        ).innerHTML = `
+
+            <div class="price-card recommended">
+
+                <div class="price-info">
+
+                    <span class="badge">
+                        ⭐ THOẢI MÁI
+                    </span>
+
+                    <h3>
+                        🚙 Gói 7 chỗ
+                    </h3>
+
+                    <div class="price">
+                        Báo giá riêng
+                    </div>
+
+                    <div class="trip-info">
+                        ${tripInfo}
+                    </div>
+
+                    <div class="description">
+
+                        Quãng đường trên 200km.
+                        Vui lòng liên hệ để được báo giá phù hợp
+                        theo tuyến đường và lịch trình.
+
+                    </div>
+
+                </div>
+
+                <div class="price-action">
+
+                    <button
+                        onclick="showConfirmPopup('Gói 7 chỗ')"
+                    >
+
+                        CHỌN GÓI NÀY
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        document.getElementById(
+            "result"
+        ).scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+        startDiscountPopupTimer();
+
+
+        return;
+
+    }
+
+
+    /* =================================================
+       GIÁ CƠ BẢN
+    ================================================= */
+
+    let basePrice;
+
+
+    if (
+        km <= 7
+    ) {
+
+        basePrice =
+            getPricePerKm(km);
+
+    }
+
+    else {
+
+        basePrice =
+            km *
+            getPricePerKm(km);
+
+    }
+
+
+    /* =================================================
+       GIÁ 7 CHỖ
+    ================================================= */
+
+    let price7Base =
+        basePrice;
+
+
+    if (
+        tripType === "roundtrip"
+    ) {
+
+        const discount =
+            getReturnDiscount(km);
+
+
+        if (
+            discount !== null
+        ) {
+
+            const returnPrice =
+                basePrice *
+                (
+                    1 -
+                    discount / 100
+                );
+
+
+            price7Base =
+                basePrice +
+                returnPrice;
+
+        }
+
+        else {
+
+            price7Base =
+                basePrice * 2;
+
+        }
+
+    }
+
+
+    /* =================================================
+       GIÁ 5 CHỖ
+    ================================================= */
+
+    let price5Base;
+
+
+    if (
+        km <= 30
+    ) {
+
+        price5Base =
+            price7Base;
+
+    }
+
+    else {
+
+        if (
+            tripType === "roundtrip"
+        ) {
+
+            price5Base =
+                price7Base * 0.85;
+
+        }
+
+        else {
+
+            price5Base =
+                price7Base * 0.95;
+
+        }
+
+    }
+
+
+    /* =================================================
+       PHÍ CHỜ
+    ================================================= */
+
+    const waitingFee =
+        getWaitingFee(
+            km,
+            waiting
+        );
+
+
+    /* =================================================
+       PHÍ BAN ĐÊM
+    ================================================= */
+
+    let nightFee = 0;
+
+
+    if (
+        timeType === "night"
+    ) {
+
+        nightFee =
+            50000;
+
+    }
+
+
+    /* =================================================
+       PHỤ THU NGÀY
+    ================================================= */
+
+    const surchargeMultiplier =
+        1 +
+        (
+            surchargeInfo.percent /
+            100
+        );
+
+
+    price5Base =
+        price5Base *
+        surchargeMultiplier;
+
+
+    price7Base =
+        price7Base *
+        surchargeMultiplier;
+
+
+    /* =================================================
+       TỔNG GIÁ
+    ================================================= */
+
+    let price5 =
+        price5Base +
+        waitingFee +
+        nightFee;
+
+
+    let price7 =
+        price7Base +
+        waitingFee +
+        nightFee;
+
+
+    price5 =
+        roundPrice(price5);
+
+
+    price7 =
+        roundPrice(price7);
+
+
+    /* =================================================
+       LƯU GIÁ GỐC
+    ================================================= */
+
+    currentPrice5 =
+        passengers <= 4
+        ? price5
+        : 0;
+
+
+    currentPrice7 =
+        price7;
+
+
+    /* =================================================
+       THÔNG BÁO PHỤ THU
+    ================================================= */
+
+    const surchargeNotice =
+        document.getElementById(
+            "surchargeNotice"
+        );
+
+
+    if (
+        surchargeInfo.percent > 0
+    ) {
+
+        surchargeNotice.style.display =
+            "block";
+
+
+        surchargeNotice.innerHTML = `
+
+            ⚠️ Ngày bạn chọn là
+            <b>${surchargeInfo.label}</b>.
+
+            <br>
+
+            Giá cước đã được cộng
+            <b>+${surchargeInfo.percent}% phụ thu</b>
+            theo ngày đi.
+
+        `;
+
+    }
+
+    else {
+
+        surchargeNotice.style.display =
+            "none";
+
+    }
+
+
+    /* =================================================
+       HIỆN KẾT QUẢ
+    ================================================= */
+
+    setActiveStep(2);
+
+    document.getElementById(
+        "result"
+    ).style.display =
+        "block";
+
+
+    /* =================================================
+       RESET MÃ GIẢM CŨ
+    ================================================= */
+
+    currentDiscount = 0;
+
+
+    document.getElementById(
+        "phoneForm"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "discountCodeResult"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "discountPopup"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "discountFloat"
+    ).style.display =
+        "none";
+
+
+    /* =================================================
+       GÓI 5 CHỖ
+    ================================================= */
+
+    if (
+        passengers <= 4
+    ) {
+
+        document.getElementById(
+            "price5"
+        ).innerHTML = `
+
+            <div class="price-card">
+
+                <div class="price-info">
+
+                    <span class="badge">
+                        💰 TIẾT KIỆM
+                    </span>
+
+                    <h3>
+                        🚗 Gói 5 chỗ
+                    </h3>
+
+                    <div class="price">
+
+                        ${formatPrice(price5)}
+
+                    </div>
+
+                    <div class="trip-info">
+                        ${tripInfo}
+                    </div>
+
+                    <div class="description">
+
+                        Dành cho tối đa 4 người.<br>
+
+                        💰 Giá tiết kiệm hơn 7 chỗ.
+
+                    </div>
+
+                </div>
+
+                <div class="price-action">
+
+                    <button
+                        onclick="showConfirmPopup('Gói 5 chỗ')"
+                    >
+
+                        CHỌN GÓI NÀY
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    else {
+
+        document.getElementById(
+            "price5"
+        ).innerHTML =
+            "";
+
+    }
+
+
+    /* =================================================
+       GÓI 7 CHỖ
+    ================================================= */
+
+    document.getElementById(
+        "price7"
+    ).innerHTML = `
+
+        <div class="price-card recommended">
+
+            <div class="price-info">
+
+                <span class="badge">
+                    ⭐ THOẢI MÁI
+                </span>
+
+                <h3>
+                    🚙 Gói 7 chỗ
+                </h3>
+
+                <div class="price">
+
+                    ${formatPrice(price7)}
+
+                </div>
+
+                <div class="trip-info">
+                    ${tripInfo}
+                </div>
+
+                <div class="description">
+
+                    Dành cho tối đa 6 người.<br>
+
+                    🧳 Cốp rộng · 💺 Ghế thoải mái · 🌬️ Thoáng<br>
+
+                    😊 Không mùi · 🚗 Hạn chế say xe
+
+                </div>
+
+            </div>
+
+            <div class="price-action">
+
+                <button
+                    onclick="showConfirmPopup('Gói 7 chỗ')"
+                >
+
+                    CHỌN GÓI NÀY
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    /* =================================================
+       CUỘN ĐẾN KẾT QUẢ
+    ================================================= */
+
+    document.getElementById(
+        "result"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+
+    /* =================================================
+       POPUP SAU 5 GIÂY
+    ================================================= */
+
+    startDiscountPopupTimer();
+
+}
+
+
+/* Khởi tạo đúng bước khi mở trang */
+setActiveStep(1);
+
+</script>
+
+</body>
+</html>
