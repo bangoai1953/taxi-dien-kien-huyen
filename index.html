@@ -4,7 +4,44 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>XE ĐIỆN KIÊN HUYỀN - Tra cước xe dịch vụ Hà Nam</title>
+<title>Taxi Điện Kiên Huyền – Tra cước xe Hà Nam</title>
+<meta name="description" content="Tra cước Taxi Điện Kiên Huyền tại Hà Nam. Xe điện sạch, đón trả tận nơi, xem giá tham khảo trước khi đặt. Phục vụ Lý Nhân, Phủ Lý, Bình Lục, Duy Tiên, Nội Bài, Hà Nội, Nam Định và các tỉnh.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#079447">
+<link rel="canonical" href="https://taxi-dien-kien-huyen.vercel.app/">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Taxi Điện Kiên Huyền – Tra cước xe Hà Nam">
+<meta property="og:description" content="Xem giá cước tham khảo nhanh, xe điện sạch, đón trả tận nơi. Gọi 0869.017.368.">
+<meta property="og:url" content="https://taxi-dien-kien-huyen.vercel.app/">
+<meta property="og:image" content="https://taxi-dien-kien-huyen.vercel.app/og-taxi-kien-huyen.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["TaxiService","LocalBusiness"],
+  "name": "Taxi Điện Kiên Huyền",
+  "url": "https://taxi-dien-kien-huyen.vercel.app/",
+  "telephone": "+84869017368",
+  "image": "https://taxi-dien-kien-huyen.vercel.app/og-taxi-kien-huyen.png",
+  "description": "Dịch vụ taxi điện và xe dịch vụ tại Hà Nam, nhận đón trả tận nơi đi Hà Nội, Nội Bài, Nam Định và các tỉnh.",
+  "areaServed": ["Hà Nam","Lý Nhân","Phủ Lý","Bình Lục","Duy Tiên","Hà Nội","Nội Bài","Nam Định"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lý Nhân",
+    "addressRegion": "Hà Nam",
+    "addressCountry": "VN"
+  },
+  "priceRange": "₫₫"
+}
+</script>
 
 <style>
 
@@ -1147,6 +1184,103 @@ select:invalid {
 
 }
 
+
+/* =====================================================
+   GIAI ĐOẠN 2 - MOBILE FIRST / CHUYỂN ĐỔI / SOCIAL
+===================================================== */
+.promo-ribbon {
+    display:flex; align-items:center; justify-content:center; gap:7px;
+    padding:9px 12px; background:#fff3e6; color:#b34a00;
+    border-bottom:1px solid #ffe0bd; font-size:13px; font-weight:800; text-align:center;
+}
+.activity-strip {
+    margin: 0 18px 12px; padding: 9px 11px; border-radius: 10px;
+    background: #eefaf3; color: #17663d; font-size: 12px;
+    line-height: 1.4; text-align: center;
+}
+.activity-strip small { color:#738078; font-weight:400; }
+.route-auto-box {
+    margin-top: 8px; padding: 10px 12px; border-radius: 10px;
+    background: #f5f7f6; border: 1px solid #e1e7e3; color: #536059;
+    font-size: 13px; line-height: 1.45;
+}
+.route-auto-box.loading { background:#fff8e7; border-color:#ffe0a3; color:#8b6200; }
+.route-auto-box.success { background:#eafff2; border-color:#bfe9cf; color:#087f42; font-weight:700; }
+.route-auto-box.error { background:#fff1f1; border-color:#ffc7c7; color:#b3261e; }
+.social-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:12px; }
+.social-btn {
+    min-height:44px; display:flex; align-items:center; justify-content:center;
+    border-radius:10px; text-decoration:none; font-size:13px; font-weight:800;
+    border:1px solid #e4e9e6; background:#fff; color:#26342c;
+}
+.social-btn.zalo { color:#0068ff; border-color:#cddfff; background:#f4f8ff; }
+.social-btn.facebook { color:#1877f2; border-color:#d5e4fb; background:#f5f9ff; }
+.map-api-warning {
+    display:none; margin:10px 0 0; padding:10px; border-radius:9px;
+    background:#fff7df; color:#775800; font-size:12px; line-height:1.45;
+}
+@media (max-width:700px) {
+    body { background:#fff; }
+    .container { width:100%; max-width:none; min-height:100vh; box-shadow:none; padding-bottom:76px; }
+    .header { padding:15px 12px 13px; }
+    .header h1 { font-size:20px; line-height:1.2; }
+    .header p { margin-top:4px; font-size:13px; }
+    .phone { margin-top:6px; }
+    .phone strong { font-size:17px; }
+    .header-subline { margin-top:5px; font-size:11px; }
+    .trust-strip { grid-template-columns:repeat(3,1fr); border-bottom:1px solid #e4e9e6; }
+    .trust-item { display:block; padding:7px 4px; border-right:1px solid #edf1ee; border-bottom:0; }
+    .trust-item:last-child { border-right:0; }
+    .trust-item b { display:block; font-size:10px; }
+    .trust-item span { display:block; margin-top:2px; font-size:8px; }
+    .promo-ribbon { font-size:11px; padding:7px 8px; }
+    .activity-strip { margin:9px 12px 8px; padding:7px 9px; font-size:11px; }
+    .form { padding:12px; }
+    .section-title { font-size:17px; margin-bottom:11px; }
+    .booking-steps { gap:5px; margin-bottom:12px; }
+    .step { min-height:32px; font-size:10px; gap:4px; }
+    .step span { width:19px; height:19px; font-size:10px; }
+    label { margin-top:10px; margin-bottom:5px; font-size:13px; }
+    input, select { padding:11px 12px; min-height:44px; font-size:15px; border-radius:9px; }
+    .row { gap:8px; }
+    .field-help { margin-top:5px; font-size:10px; }
+    .waiting-help { padding:7px 8px; }
+    .route-auto-box { padding:8px 9px; font-size:11px; }
+    .main-button { margin-top:14px; padding:12px; min-height:46px; font-size:15px; }
+    .note { margin-top:11px; padding:10px; font-size:11px; line-height:1.45; }
+    #result { padding:0 12px 18px; }
+    .result-title { font-size:18px; margin-bottom:9px; }
+    .result-subtitle { margin:-3px 0 10px; font-size:11px; }
+    .price-card { padding:10px; gap:8px; border-radius:12px; }
+    .price-info { width:65%; }
+    .price-action { width:35%; }
+    .price-card h3 { font-size:15px; }
+    .price { font-size:21px; margin:7px 0; }
+    .discounted-price { font-size:24px; }
+    .description, .trip-info { font-size:10px; line-height:1.4; }
+    .price-action button { min-height:43px; font-size:10px; padding:9px 4px; }
+    .success { padding:10px; font-size:12px; }
+    .warning { padding:10px; font-size:11px; }
+    .social-actions { grid-template-columns:1fr 1fr; gap:7px; }
+    .social-btn { min-height:40px; font-size:11px; }
+    .discount-popup { width:calc(100% - 24px); padding:20px 16px 16px; border-radius:16px; }
+    .popup-title { font-size:17px; white-space:normal; }
+    .popup-title .fifty { font-size:26px; }
+    .popup-subtitle { font-size:13px; margin-bottom:11px; }
+    .popup-input, .popup-button, .apply-discount-btn { min-height:45px; padding:11px; }
+    .confirm-popup {
+        width:calc(100% - 24px); max-height:calc(100vh - 24px); overflow:auto;
+        padding:20px 16px 16px; border-radius:16px;
+    }
+    .confirm-icon { width:50px; height:50px; font-size:27px; margin-bottom:9px; }
+    .confirm-title { font-size:18px; margin-bottom:8px; }
+    .confirm-package { font-size:15px; }
+    .booking-label { margin:9px 0 5px; font-size:12px; }
+    .booking-input { padding:11px; min-height:44px; }
+    .booking-summary { padding:8px; font-size:11px; }
+    .mobile-call-bar { left:10px; right:10px; bottom:9px; min-height:50px; font-size:14px; }
+}
+
 </style>
 </head>
 
@@ -1182,6 +1316,15 @@ select:invalid {
     <div class="trust-item"><b>🛡️ Giá rõ ràng</b><span>Xem trước khi đặt</span></div>
 </div>
 
+<div class="promo-ribbon">
+    🎁 Khách mới: ưu đãi đến <b>50% cước xe</b>
+</div>
+
+<div class="activity-strip" id="activityStrip">
+    ⚡ Minh hoạ hoạt động: <b>12 lượt đang xem giá</b>
+    <small> · số liệu mô phỏng</small>
+</div>
+
 
 <!-- =====================================================
      FORM
@@ -1201,8 +1344,7 @@ select:invalid {
 
 
     <label>
-        Điểm đón
-        <span class="optional">(không bắt buộc)</span>
+        Điểm đón <span class="required">*</span>
     </label>
 
     <input
@@ -1213,8 +1355,7 @@ select:invalid {
 
 
     <label>
-        Điểm đến
-        <span class="optional">(không bắt buộc)</span>
+        Điểm đến <span class="required">*</span>
     </label>
 
     <input
@@ -1308,16 +1449,12 @@ select:invalid {
     >
 
 
-    <label>
-        Quãng đường (km) <span class="required">*</span>
-    </label>
+    <input type="hidden" id="km" value="">
 
-    <input
-        type="number"
-        id="km"
-        min="1"
-        placeholder="Nhập tổng quãng đường"
-    >
+    <div id="routeAutoBox" class="route-auto-box">
+        🗺️ Nhập điểm đón và điểm đến. Hệ thống sẽ tự tính quãng đường bằng Google Maps.
+    </div>
+    <div id="mapApiWarning" class="map-api-warning"></div>
 
 
     <div id="waitingSection">
@@ -1448,6 +1585,15 @@ select:invalid {
             📞 Gọi ngay 0869.017.368
         </a>
 
+        <div class="social-actions">
+            <a class="social-btn zalo" href="https://zalo.me/0869017368" target="_blank" rel="noopener">
+                💬 Nhắn Zalo
+            </a>
+            <a class="social-btn facebook" href="#" onclick="shareFacebook(); return false;">
+                📘 Chia sẻ Facebook
+            </a>
+        </div>
+
     </div>
 
 </div>
@@ -1477,7 +1623,7 @@ select:invalid {
 
         <div class="popup-title">
 
-            🎁 GIẢM đến
+            🎁 KHÁCH MỚI GIẢM đến
             <span class="fifty">50%</span>
             giá cước
 
@@ -1486,7 +1632,7 @@ select:invalid {
 
         <div class="popup-subtitle">
 
-            Nhập SĐT để nhận mã
+            Nhập SĐT để nhận mã — chưa cần chọn gói
 
         </div>
 
@@ -1698,8 +1844,16 @@ let currentPrice5 = 0;
 let currentPrice7 = 0;
 
 let currentDiscount = 0;
-
 let popupTimer = null;
+let googleMapsLoaderPromise = null;
+let currentRouteKm = 0;
+let currentRouteMinutes = 0;
+
+/*
+ * DÁN API KEY GOOGLE MAPS CỦA BẠN VÀO DÒNG DƯỚI.
+ * API key cần bật Maps JavaScript API + Routes API.
+ */
+const GOOGLE_MAPS_API_KEY = "AIzaSyD3gvOXe50xpiCe0-Ur--6iSmsoJTU3T1A";
 
 /* Đường dẫn Google Apps Script nhận thông tin đặt xe */
 const GOOGLE_SCRIPT_URL =
@@ -1708,6 +1862,173 @@ const GOOGLE_SCRIPT_URL =
 let selectedPackageName = "";
 let selectedPackagePrice = 0;
 let isSubmittingBooking = false;
+
+
+function getOrCreateClientRequestId() {
+    let id = sessionStorage.getItem("currentClientRequestId");
+    if (!id) {
+        id = createClientRequestId();
+        sessionStorage.setItem("currentClientRequestId", id);
+    }
+    return id;
+}
+
+async function postToGoogleScript(payload) {
+    await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+    });
+}
+
+function loadGoogleMaps() {
+    if (window.google && google.maps && google.maps.importLibrary) {
+        return Promise.resolve();
+    }
+    if (googleMapsLoaderPromise) return googleMapsLoaderPromise;
+
+    googleMapsLoaderPromise = new Promise(function(resolve, reject) {
+        if (!GOOGLE_MAPS_API_KEY || GOOGLE_MAPS_API_KEY.includes("DAN_API_KEY")) {
+            reject(new Error("Chưa cấu hình Google Maps API key"));
+            return;
+        }
+
+        window.__mapsReady = function() {
+            resolve();
+            try { delete window.__mapsReady; } catch (e) {}
+        };
+
+        const script = document.createElement("script");
+        script.src =
+            "https://maps.googleapis.com/maps/api/js?key=" +
+            encodeURIComponent(GOOGLE_MAPS_API_KEY) +
+            "&loading=async&libraries=routes&language=vi&region=VN&callback=__mapsReady";
+        script.async = true;
+        script.defer = true;
+        script.onerror = function() {
+            reject(new Error("Không tải được Google Maps"));
+        };
+        document.head.appendChild(script);
+    });
+
+    return googleMapsLoaderPromise;
+}
+
+function invalidateRouteDistance() {
+    currentRouteKm = 0;
+    currentRouteMinutes = 0;
+    const kmInput = document.getElementById("km");
+    if (kmInput) kmInput.value = "";
+    const box = document.getElementById("routeAutoBox");
+    if (box) {
+        box.className = "route-auto-box";
+        box.innerHTML =
+            "🗺️ Nhập điểm đón và điểm đến. Hệ thống sẽ tự tính quãng đường bằng Google Maps.";
+    }
+}
+
+async function calculateRouteDistance(showAlertOnError) {
+    const pickup = document.getElementById("pickup").value.trim();
+    const destination = document.getElementById("destination").value.trim();
+    const box = document.getElementById("routeAutoBox");
+    const warning = document.getElementById("mapApiWarning");
+
+    if (!pickup || !destination) {
+        if (showAlertOnError) alert("Vui lòng nhập Điểm đón và Điểm đến.");
+        return 0;
+    }
+
+    try {
+        box.className = "route-auto-box loading";
+        box.innerHTML = "⏳ Đang tính quãng đường thực tế...";
+        warning.style.display = "none";
+
+        await loadGoogleMaps();
+        const { Route } = await google.maps.importLibrary("routes");
+
+        const response = await Route.computeRoutes({
+            origin: pickup,
+            destination: destination,
+            travelMode: "DRIVING",
+            region: "vn",
+            units: "METRIC",
+            fields: ["distanceMeters", "durationMillis"]
+        });
+
+        if (!response.routes || !response.routes.length) {
+            throw new Error("Không tìm thấy lộ trình");
+        }
+
+        const route = response.routes[0];
+        const km = Math.max(1, Math.ceil((route.distanceMeters || 0) / 1000));
+        const minutes = Math.max(1, Math.round((route.durationMillis || 0) / 60000));
+
+        currentRouteKm = km;
+        currentRouteMinutes = minutes;
+        document.getElementById("km").value = String(km);
+
+        box.className = "route-auto-box success";
+        box.innerHTML =
+            "✅ Quãng đường Google Maps: <b>" + km + " km</b>" +
+            (minutes ? " · khoảng " + minutes + " phút" : "") +
+            "<br><small>Giá cước sẽ tính theo quãng đường này.</small>";
+
+        return km;
+    } catch (error) {
+        console.error("Google Maps route error:", error);
+        box.className = "route-auto-box error";
+        box.innerHTML =
+            "⚠️ Chưa tính được quãng đường. Kiểm tra lại địa chỉ hoặc cấu hình Google Maps API.";
+
+        if (!GOOGLE_MAPS_API_KEY || GOOGLE_MAPS_API_KEY.includes("DAN_API_KEY")) {
+            warning.style.display = "block";
+            warning.innerHTML =
+                "Cần dán API key Google Maps vào biến <b>GOOGLE_MAPS_API_KEY</b> trong file index.html.";
+        }
+
+        if (showAlertOnError) {
+            alert("Chưa tính được quãng đường. Vui lòng kiểm tra lại Điểm đón / Điểm đến.");
+        }
+        return 0;
+    }
+}
+
+function shareFacebook() {
+    const url = "https://www.facebook.com/sharer/sharer.php?u=" +
+        encodeURIComponent(window.location.href);
+    window.open(url, "_blank", "noopener,noreferrer,width=720,height=560");
+}
+
+function startActivitySimulation() {
+    const el = document.getElementById("activityStrip");
+    if (!el) return;
+
+    const names = ["Thanh Huyền", "Minh Anh", "Tuấn Anh", "Ngọc Anh", "Hải Yến"];
+    let index = 0;
+
+    function render() {
+        const count = 7 + Math.floor(Math.random() * 9);
+        const other = 1 + Math.floor(Math.random() * 4);
+
+        if (index % 2 === 0) {
+            el.innerHTML =
+                "⚡ Minh hoạ hoạt động: <b>" +
+                names[index % names.length] + " và " + other +
+                " người khác đang xem giá</b> <small>· số liệu mô phỏng</small>";
+        } else {
+            el.innerHTML =
+                "⚡ Minh hoạ hoạt động: <b>" + count +
+                " lượt đang check giá</b> <small>· số liệu mô phỏng</small>";
+        }
+        index++;
+    }
+
+    render();
+    setInterval(render, 9000);
+}
 
 
 /* =====================================================
@@ -1987,6 +2308,9 @@ async function submitBooking() {
 
     const bookingData = {
 
+        eventType:
+            "booking_selected",
+
         name:
             nameInput.value.trim(),
 
@@ -2050,8 +2374,7 @@ async function submitBooking() {
             "Website tra cước",
 
         clientRequestId:
-            sessionStorage.getItem("currentClientRequestId") ||
-            createClientRequestId(),
+            getOrCreateClientRequestId(),
 
         submittedAt:
             new Date().toISOString()
@@ -2125,21 +2448,7 @@ async function submitBooking() {
            vẫn được Apps Script tiếp nhận.
         */
 
-        await fetch(
-            GOOGLE_SCRIPT_URL,
-            {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
-                body:
-                    JSON.stringify(
-                        bookingData
-                    )
-            }
-        );
+        await postToGoogleScript(bookingData);
 
 
         sessionStorage.setItem(
@@ -2780,7 +3089,7 @@ function generateDiscount() {
 
 
 /* =====================================================
-   POPUP SAU 5 GIÂY
+   POPUP SAU 3 GIÂY
 ===================================================== */
 
 function startDiscountPopupTimer() {
@@ -2809,7 +3118,7 @@ function startDiscountPopupTimer() {
                 }
 
             },
-            5000
+            3000
         );
 
 }
@@ -2859,50 +3168,43 @@ function openDiscountPopup() {
    NHẬN MÃ
 ===================================================== */
 
-function getDiscountCode() {
+async function getDiscountCode() {
 
-    const phone =
-        document.getElementById(
-            "discountPhone"
-        )
-        .value
-        .trim();
+    const phoneInput = document.getElementById("discountPhone");
+    const button = document.querySelector("#phoneForm .popup-button");
+    const phone = phoneInput.value.replace(/\D/g, "").trim();
+    phoneInput.value = phone;
 
-
-    if (
-        !isValidPhone(phone)
-    ) {
-
-        alert(
-            "Vui lòng nhập đúng số điện thoại 10 số, bắt đầu bằng số 0."
-        );
-
+    if (!isValidPhone(phone)) {
+        alert("Vui lòng nhập đúng số điện thoại 10 số, bắt đầu bằng số 0.");
         return;
-
     }
 
+    currentDiscount = generateDiscount();
+    const clientRequestId = getOrCreateClientRequestId();
 
-    currentDiscount =
-        generateDiscount();
+    button.disabled = true;
+    button.innerText = "ĐANG NHẬN MÃ...";
 
+    try {
+        await postToGoogleScript({
+            eventType: "discount_lead",
+            phone: phone,
+            discount: currentDiscount + "%",
+            source: "Popup ưu đãi website",
+            clientRequestId: clientRequestId,
+            submittedAt: new Date().toISOString()
+        });
+    } catch (error) {
+        console.error("Lỗi lưu lead nhận mã:", error);
+    } finally {
+        button.disabled = false;
+        button.innerText = "NHẬN MÃ GIẢM GIÁ";
+    }
 
-    document.getElementById(
-        "discountPercent"
-    ).innerText =
-        currentDiscount;
-
-
-    document.getElementById(
-        "phoneForm"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "discountCodeResult"
-    ).style.display =
-        "block";
-
+    document.getElementById("discountPercent").innerText = currentDiscount;
+    document.getElementById("phoneForm").style.display = "none";
+    document.getElementById("discountCodeResult").style.display = "block";
 }
 
 
@@ -3047,7 +3349,7 @@ function applyDiscount() {
    TÍNH GIÁ
 ===================================================== */
 
-function calculatePrice() {
+async function calculatePrice() {
 
 
     const passengers =
@@ -3074,12 +3376,11 @@ function calculatePrice() {
         ).value;
 
 
-    const km =
-        Number(
-            document.getElementById(
-                "km"
-            ).value
-        );
+    let km = Number(document.getElementById("km").value);
+
+    if (!km || km <= 0) {
+        km = await calculateRouteDistance(false);
+    }
 
 
     const waitingValue =
@@ -3106,6 +3407,16 @@ function calculatePrice() {
 
     }
 
+
+    if (!document.getElementById("pickup").value.trim()) {
+        alert("Vui lòng nhập Điểm đón.");
+        return;
+    }
+
+    if (!document.getElementById("destination").value.trim()) {
+        alert("Vui lòng nhập Điểm đến.");
+        return;
+    }
 
     if (!passengers) {
 
@@ -3157,7 +3468,7 @@ function calculatePrice() {
     ) {
 
         alert(
-            "Vui lòng nhập quãng đường."
+            "Chưa tính được quãng đường. Hãy kiểm tra Điểm đón và Điểm đến."
         );
 
         return;
@@ -3811,6 +4122,38 @@ function calculatePrice() {
 
 /* Khởi tạo đúng bước khi mở trang */
 setActiveStep(1);
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    startActivitySimulation();
+
+    const pickup = document.getElementById("pickup");
+    const destination = document.getElementById("destination");
+
+    if (pickup && destination) {
+        pickup.addEventListener("input", invalidateRouteDistance);
+        destination.addEventListener("input", invalidateRouteDistance);
+
+        pickup.addEventListener("blur", function() {
+            if (pickup.value.trim() && destination.value.trim()) {
+                calculateRouteDistance(false);
+            }
+        });
+        destination.addEventListener("blur", function() {
+            if (pickup.value.trim() && destination.value.trim()) {
+                calculateRouteDistance(false);
+            }
+        });
+    }
+
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+            navigator.serviceWorker.register("/sw.js").catch(function(error) {
+                console.warn("Service Worker:", error);
+            });
+        });
+    }
+});
 
 </script>
 
