@@ -9,7 +9,6 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#079447">
 <link rel="canonical" href="https://taxi-dien-kien-huyen.vercel.app/">
-<link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="apple-touch-icon" href="/icon-192.png">
 
@@ -1845,15 +1844,8 @@ let currentPrice7 = 0;
 
 let currentDiscount = 0;
 let popupTimer = null;
-let googleMapsLoaderPromise = null;
 let currentRouteKm = 0;
 let currentRouteMinutes = 0;
-
-/*
- * DÁN API KEY GOOGLE MAPS CỦA BẠN VÀO DÒNG DƯỚI.
- * API key cần bật Maps JavaScript API + Routes API.
- */
-const GOOGLE_MAPS_API_KEY = "AIzaSyD3gvOXe50xpiCe0-Ur--6iSmsoJTU3T1A";
 
 /* Đường dẫn Google Apps Script nhận thông tin đặt xe */
 const GOOGLE_SCRIPT_URL =
@@ -1884,39 +1876,6 @@ async function postToGoogleScript(payload) {
     });
 }
 
-function loadGoogleMaps() {
-    if (window.google && google.maps && google.maps.importLibrary) {
-        return Promise.resolve();
-    }
-    if (googleMapsLoaderPromise) return googleMapsLoaderPromise;
-
-    googleMapsLoaderPromise = new Promise(function(resolve, reject) {
-        if (!GOOGLE_MAPS_API_KEY || GOOGLE_MAPS_API_KEY.includes("DAN_API_KEY")) {
-            reject(new Error("Chưa cấu hình Google Maps API key"));
-            return;
-        }
-
-        window.__mapsReady = function() {
-            resolve();
-            try { delete window.__mapsReady; } catch (e) {}
-        };
-
-        const script = document.createElement("script");
-        script.src =
-            "https://maps.googleapis.com/maps/api/js?key=" +
-            encodeURIComponent(GOOGLE_MAPS_API_KEY) +
-            "&loading=async&libraries=routes&language=vi&region=VN&callback=__mapsReady";
-        script.async = true;
-        script.defer = true;
-        script.onerror = function() {
-            reject(new Error("Không tải được Google Maps"));
-        };
-        document.head.appendChild(script);
-    });
-
-    return googleMapsLoaderPromise;
-}
-
 function invalidateRouteDistance() {
     currentRouteKm = 0;
     currentRouteMinutes = 0;
@@ -1926,8 +1885,55 @@ function invalidateRouteDistance() {
     if (box) {
         box.className = "route-auto-box";
         box.innerHTML =
-            "🗺️ Nhập điểm đón và điểm đến. Hệ thống sẽ tự tính quãng đường bằng Google Maps.";
+            "🗺️ Nhập điểm đón và điểm đến. Hệ thống sẽ tự tính quãng đường.";
     }
+}
+
+function requestRouteFromBackend(pickup, destination) {
+    return new Promise(function(resolve, reject) {
+        const callbackName =
+            "__routeCallback_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
+
+        let script = null;
+        let finished = false;
+
+        const timer = setTimeout(function() {
+            cleanup();
+            reject(new Error("Hết thời gian chờ tính quãng đường."));
+        }, 15000);
+
+        function cleanup() {
+            if (finished) return;
+            finished = true;
+            clearTimeout(timer);
+            try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+        }
+
+        window[callbackName] = function(data) {
+            cleanup();
+            if (data && data.ok) {
+                resolve(data);
+            } else {
+                reject(new Error(data && data.error ? data.error : "Không tính được quãng đường."));
+            }
+        };
+
+        script = document.createElement("script");
+        script.src =
+            GOOGLE_SCRIPT_URL +
+            "?action=route" +
+            "&pickup=" + encodeURIComponent(pickup) +
+            "&destination=" + encodeURIComponent(destination) +
+            "&callback=" + encodeURIComponent(callbackName) +
+            "&_=" + Date.now();
+        script.async = true;
+        script.onerror = function() {
+            cleanup();
+            reject(new Error("Không kết nối được máy chủ tính quãng đường."));
+        };
+        document.head.appendChild(script);
+    });
 }
 
 async function calculateRouteDistance(showAlertOnError) {
@@ -1944,26 +1950,15 @@ async function calculateRouteDistance(showAlertOnError) {
     try {
         box.className = "route-auto-box loading";
         box.innerHTML = "⏳ Đang tính quãng đường thực tế...";
-        warning.style.display = "none";
+        if (warning) warning.style.display = "none";
 
-        await loadGoogleMaps();
-        const { Route } = await google.maps.importLibrary("routes");
+        const result = await requestRouteFromBackend(pickup, destination);
+        const km = Number(result.km || 0);
+        const minutes = Number(result.minutes || 0);
 
-        const response = await Route.computeRoutes({
-            origin: pickup,
-            destination: destination,
-            travelMode: "DRIVING",
-            region: "vn",
-            fields: ["distanceMeters", "durationMillis"]
-        });
-
-        if (!response.routes || !response.routes.length) {
-            throw new Error("Không tìm thấy lộ trình");
+        if (!km || km <= 0) {
+            throw new Error("Quãng đường trả về không hợp lệ.");
         }
-
-        const route = response.routes[0];
-        const km = Math.max(1, Math.ceil((route.distanceMeters || 0) / 1000));
-        const minutes = Math.max(1, Math.round((route.durationMillis || 0) / 60000));
 
         currentRouteKm = km;
         currentRouteMinutes = minutes;
@@ -1977,19 +1972,19 @@ async function calculateRouteDistance(showAlertOnError) {
 
         return km;
     } catch (error) {
-        console.error("Google Maps route error:", error);
+        console.error("Route backend error:", error);
         box.className = "route-auto-box error";
         box.innerHTML =
-            "⚠️ Chưa tính được quãng đường. Kiểm tra lại địa chỉ hoặc cấu hình Google Maps API.";
+            "⚠️ Chưa tính được quãng đường. Hãy nhập địa chỉ rõ hơn hoặc thử lại sau.";
 
-        if (!GOOGLE_MAPS_API_KEY || GOOGLE_MAPS_API_KEY.includes("DAN_API_KEY")) {
+        if (warning) {
             warning.style.display = "block";
             warning.innerHTML =
-                "Cần dán API key Google Maps vào biến <b>GOOGLE_MAPS_API_KEY</b> trong file index.html.";
+                "Nếu địa chỉ đúng mà vẫn lỗi, vui lòng gọi <b>0869.017.368</b>.";
         }
 
         if (showAlertOnError) {
-            alert("Chưa tính được quãng đường. Vui lòng kiểm tra lại Điểm đón / Điểm đến.");
+            alert(error && error.message ? error.message : "Chưa tính được quãng đường.");
         }
         return 0;
     }
@@ -4142,14 +4137,6 @@ document.addEventListener("DOMContentLoaded", function() {
             if (pickup.value.trim() && destination.value.trim()) {
                 calculateRouteDistance(false);
             }
-        });
-    }
-
-    if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function() {
-            navigator.serviceWorker.register("/sw.js").catch(function(error) {
-                console.warn("Service Worker:", error);
-            });
         });
     }
 });
