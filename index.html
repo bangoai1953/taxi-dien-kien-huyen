@@ -1280,6 +1280,31 @@ select:invalid {
     .mobile-call-bar { left:10px; right:10px; bottom:9px; min-height:50px; font-size:14px; }
 }
 
+
+.promo-clickable {
+    width: 100%;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    animation: promoPulse 1.7s ease-in-out infinite;
+}
+.promo-clickable:hover { filter: brightness(0.98); }
+.promo-clickable:active { transform: scale(0.99); }
+.promo-cta {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: #ff6d00;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 900;
+}
+@keyframes promoPulse {
+    0%, 100% { box-shadow: inset 0 0 0 0 rgba(255,109,0,0); }
+    50% { box-shadow: inset 0 0 0 2px rgba(255,109,0,0.28); }
+}
+
 </style>
 </head>
 
@@ -1308,295 +1333,6 @@ select:invalid {
     </div>
 
 </div>
-
-<div class="trust-strip">
-    <div class="trust-item"><b>🚗 Xe điện sạch</b><span>Êm, thoáng, không mùi</span></div>
-    <div class="trust-item"><b>⏱️ Phản hồi nhanh</b><span>Liên hệ trong 10 phút</span></div>
-    <div class="trust-item"><b>🛡️ Giá rõ ràng</b><span>Xem trước khi đặt</span></div>
-</div>
-
-<div class="promo-ribbon">
-    🎁 Khách mới: ưu đãi đến <b>50% cước xe</b>
-</div>
-
-<div class="activity-strip" id="activityStrip">
-    ⚡ Minh hoạ hoạt động: <b>12 lượt đang xem giá</b>
-    <small> · số liệu mô phỏng</small>
-</div>
-
-
-<!-- =====================================================
-     FORM
-===================================================== -->
-
-<div class="form">
-
-    <div class="booking-steps" aria-label="Quy trình đặt xe">
-        <div class="step active" data-step="1"><span>1</span>Nhập chuyến</div>
-        <div class="step" data-step="2"><span>2</span>Xem giá</div>
-        <div class="step" data-step="3"><span>3</span>Đặt xe</div>
-    </div>
-
-    <div class="section-title">
-        📋 Nhập thông tin chuyến đi
-    </div>
-
-
-    <label>
-        Điểm đón <span class="required">*</span>
-    </label>
-
-    <input
-        type="text"
-        id="pickup"
-        placeholder="Ví dụ: Lý Nhân, Hà Nam"
-    >
-
-
-    <label>
-        Điểm đến <span class="required">*</span>
-    </label>
-
-    <input
-        type="text"
-        id="destination"
-        placeholder="Ví dụ: Hà Nội"
-    >
-
-
-    <div class="row">
-
-        <div>
-
-            <label>
-                Số người <span class="required">*</span>
-            </label>
-
-            <select id="passengers">
-
-                <option value="">
-                    -- Chọn số người --
-                </option>
-
-                <option value="1">1 người</option>
-                <option value="2">2 người</option>
-                <option value="3">3 người</option>
-                <option value="4">4 người</option>
-                <option value="5">5 người</option>
-                <option value="6">6 người</option>
-
-            </select>
-
-        </div>
-
-
-        <div>
-
-            <label>
-                Loại chuyến <span class="required">*</span>
-            </label>
-
-            <select id="tripType">
-
-                <option value="">
-                    -- Chọn --
-                </option>
-
-                <option value="oneway">
-                    1 chiều
-                </option>
-
-                <option value="roundtrip">
-                    2 chiều
-                </option>
-
-            </select>
-
-        </div>
-
-    </div>
-
-
-    <label>
-        Thời gian đi <span class="required">*</span>
-    </label>
-
-    <select id="timeType">
-
-        <option value="">
-            -- Chọn ban ngày / ban đêm --
-        </option>
-
-        <option value="day">
-            ☀️ Đi ban ngày
-        </option>
-
-        <option value="night">
-            🌙 Đi ban đêm (+50.000đ/chuyến)
-        </option>
-
-    </select>
-
-
-    <label>
-        Ngày đi <span class="required">*</span>
-    </label>
-
-    <input
-        type="date"
-        id="travelDate"
-    >
-
-
-    <input type="hidden" id="km" value="">
-
-    <div id="routeAutoBox" class="route-auto-box">
-        🗺️ Nhập điểm đón và điểm đến. Hệ thống sẽ tự tính quãng đường bằng Google Maps.
-    </div>
-    <div id="mapApiWarning" class="map-api-warning"></div>
-
-
-    <div id="waitingSection">
-
-        <label>
-            Thời gian chờ <span class="required">*</span>
-        </label>
-
-        <select id="waiting">
-
-            <option value="">
-                -- Chọn thời gian chờ --
-            </option>
-
-            <option value="0">
-                Không chờ
-            </option>
-
-            <option value="1">
-                Chờ 1 tiếng (miễn phí)
-            </option>
-
-            <option value="2">
-                Chờ 2 tiếng (miễn phí)
-            </option>
-
-            <option value="3">
-                Chờ 3 tiếng (miễn phí)
-            </option>
-
-            <option value="4">
-                Chờ 4 tiếng (+50.000đ)
-            </option>
-
-            <option value="5">
-                Chờ 5 tiếng (+100.000đ)
-            </option>
-
-            <option value="6">
-                Chờ 6 tiếng (+150.000đ)
-            </option>
-
-            <option value="7">
-                Chờ 7 tiếng (+200.000đ)
-            </option>
-
-            <option value="8">
-                Chờ 8 tiếng (+250.000đ)
-            </option>
-
-        </select>
-
-        <div class="field-help waiting-help">
-            🎁 Miễn phí 03 tiếng chờ đầu tiên. Từ tiếng thứ 4 tính 50.000đ/tiếng.
-        </div>
-
-    </div>
-
-
-    <button
-        class="main-button"
-        onclick="calculatePrice()"
-    >
-        🧮 XEM GIÁ THAM KHẢO
-    </button>
-
-
-    <div class="note">
-
-        💡 Giá cước hiển thị là giá tham khảo.
-
-        Giá đã bao gồm các phụ thu được lựa chọn
-        trong thông tin chuyến đi.
-
-        <br><br>
-
-        🎁 Miễn phí 03 tiếng chờ đầu tiên; từ tiếng thứ 4 tính 50.000đ/tiếng.
-
-        <br><br>
-
-        🚧 Phí cầu đường và phí đón sân bay
-        phát sinh theo thực tế.
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     KẾT QUẢ
-===================================================== -->
-
-<div id="result">
-
-    <div class="result-title">
-        💰 Giá cước dự kiến
-    </div>
-
-    <div class="result-subtitle">
-        Chọn gói phù hợp, nhập số điện thoại và nhân viên sẽ xác nhận trong 10 phút.
-    </div>
-
-
-    <div
-        id="surchargeNotice"
-        class="surcharge-notice"
-    ></div>
-
-
-    <div id="price5"></div>
-
-
-    <div id="price7"></div>
-
-
-    <div
-        id="warningBox"
-        class="warning"
-    ></div>
-
-
-    <div class="success">
-
-        <b>✅ Không cần thanh toán trước.</b><br>
-        Nhân viên sẽ gọi xác nhận lịch trình và giá cuối cùng.
-
-        <a class="inline-call" href="tel:0869017368">
-            📞 Gọi ngay 0869.017.368
-        </a>
-
-        <div class="social-actions">
-            <a class="social-btn zalo" href="https://zalo.me/0869017368" target="_blank" rel="noopener">
-                💬 Nhắn Zalo
-            </a>
-            <a class="social-btn facebook" href="#" onclick="shareFacebook(); return false;">
-                📘 Chia sẻ Facebook
-            </a>
-        </div>
-
-    </div>
-
-</div>
-
 
 </div>
 
@@ -2000,28 +1736,28 @@ function startActivitySimulation() {
     const el = document.getElementById("activityStrip");
     if (!el) return;
 
-    const names = ["Thanh Huyền", "Minh Anh", "Tuấn Anh", "Ngọc Anh", "Hải Yến"];
-    let index = 0;
+    const messages = [
+        "⚡ <b>Nhiều khách đang kiểm tra giá</b>",
+        "🎁 <b>Đang có khách nhận ưu đãi đến 50%</b>",
+        "🚕 <b>Có khách đang hoàn tất đặt xe</b>",
+        "💰 <b>Khách đang xem giá các tuyến phổ biến</b>",
+        "📍 <b>Đang có khách nhập hành trình để tra cước</b>"
+    ];
+
+    let lastIndex = -1;
 
     function render() {
-        const count = 7 + Math.floor(Math.random() * 9);
-        const other = 1 + Math.floor(Math.random() * 4);
+        let index;
+        do {
+            index = Math.floor(Math.random() * messages.length);
+        } while (messages.length > 1 && index === lastIndex);
 
-        if (index % 2 === 0) {
-            el.innerHTML =
-                "⚡ Minh hoạ hoạt động: <b>" +
-                names[index % names.length] + " và " + other +
-                " người khác đang xem giá</b> <small>· số liệu mô phỏng</small>";
-        } else {
-            el.innerHTML =
-                "⚡ Minh hoạ hoạt động: <b>" + count +
-                " lượt đang check giá</b> <small>· số liệu mô phỏng</small>";
-        }
-        index++;
+        lastIndex = index;
+        el.innerHTML = messages[index];
     }
 
     render();
-    setInterval(render, 9000);
+    setInterval(render, 6500);
 }
 
 
@@ -3062,23 +2798,13 @@ function isValidPhone(phone) {
 ===================================================== */
 
 function generateDiscount() {
+    const highTier = Math.random() < 0.70;
 
-    const random =
-        Math.random() * 100;
+    if (highTier) {
+        return 30 + Math.floor(Math.random() * 21); // 30–50
+    }
 
-
-    if (random < 10) return 10;
-
-    if (random < 20) return 11;
-
-    if (random < 30) return 12;
-
-    if (random < 40) return 13;
-
-    if (random < 50) return 14;
-
-    return 15;
-
+    return 10 + Math.floor(Math.random() * 20); // 10–29
 }
 
 
@@ -3087,36 +2813,50 @@ function generateDiscount() {
 ===================================================== */
 
 function startDiscountPopupTimer() {
-
     clearTimeout(popupTimer);
 
+    if (
+        currentDiscount > 0 ||
+        sessionStorage.getItem("discountClaimed") === "1"
+    ) {
+        return;
+    }
 
-    popupTimer =
-        setTimeout(
-            function() {
+    popupTimer = setTimeout(function() {
+        const popup = document.getElementById("discountPopup");
 
-                const popup =
-                    document.getElementById(
-                        "discountPopup"
-                    );
-
-
-                if (
-                    currentDiscount === 0 &&
-                    popup.style.display !== "block"
-                ) {
-
-                    popup.style.display =
-                        "block";
-
-                }
-
-            },
-            3000
-        );
-
+        if (
+            currentDiscount === 0 &&
+            sessionStorage.getItem("discountClaimed") !== "1" &&
+            popup.style.display !== "block"
+        ) {
+            popup.style.display = "block";
+        }
+    }, 3000);
 }
 
+
+
+function openPromoDiscount() {
+    if (sessionStorage.getItem("discountClaimed") === "1") {
+        const savedDiscount = Number(sessionStorage.getItem("discountPercent") || 0);
+        const savedPhone = sessionStorage.getItem("discountPhone") || "";
+
+        if (savedDiscount > 0) currentDiscount = savedDiscount;
+        if (savedPhone) {
+            const phoneInput = document.getElementById("discountPhone");
+            const bookingPhone = document.getElementById("bookingPhone");
+            if (phoneInput) phoneInput.value = savedPhone;
+            if (bookingPhone) bookingPhone.value = savedPhone;
+        }
+
+        const form = document.querySelector(".form");
+        if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+    }
+
+    openDiscountPopup();
+}
 
 /* =====================================================
    ĐÓNG POPUP GIẢM GIÁ
@@ -3196,6 +2936,13 @@ async function getDiscountCode() {
         button.innerText = "NHẬN MÃ GIẢM GIÁ";
     }
 
+    sessionStorage.setItem("discountClaimed", "1");
+    sessionStorage.setItem("discountPercent", String(currentDiscount));
+    sessionStorage.setItem("discountPhone", phone);
+
+    const bookingPhone = document.getElementById("bookingPhone");
+    if (bookingPhone) bookingPhone.value = phone;
+
     document.getElementById("discountPercent").innerText = currentDiscount;
     document.getElementById("phoneForm").style.display = "none";
     document.getElementById("discountCodeResult").style.display = "block";
@@ -3206,136 +2953,64 @@ async function getDiscountCode() {
    ÁP MÃ GIẢM GIÁ
 ===================================================== */
 
-function applyDiscount() {
-
-    if (
-        currentDiscount <= 0
-    ) {
-
-        return;
-
+function applyDiscount(scrollToTarget) {
+    if (scrollToTarget === undefined) {
+        scrollToTarget = true;
     }
 
+    if (currentDiscount <= 0) return;
+
+    sessionStorage.setItem("discountClaimed", "1");
+    sessionStorage.setItem("discountPercent", String(currentDiscount));
 
     const newPrice5 =
-        roundPrice(
-            currentPrice5 *
-            (
-                1 -
-                currentDiscount / 100
-            )
-        );
-
+        roundPrice(currentPrice5 * (1 - currentDiscount / 100));
 
     const newPrice7 =
-        roundPrice(
-            currentPrice7 *
-            (
-                1 -
-                currentDiscount / 100
-            )
-        );
+        roundPrice(currentPrice7 * (1 - currentDiscount / 100));
 
-
-    if (
-        currentPrice5 > 0
-    ) {
-
-        const price5 =
-            document.querySelector(
-                "#price5 .price"
-            );
-
-
+    if (currentPrice5 > 0) {
+        const price5 = document.querySelector("#price5 .price");
         if (price5) {
-
             price5.innerHTML = `
-
                 <div class="price-discount-box">
-
-                    <div class="discount-label">
-
-                        🎉 GIẢM ${currentDiscount}%
-
-                    </div>
-
-                    <div class="original-price">
-
-                        ${formatPrice(currentPrice5)}
-
-                    </div>
-
-                    <div class="discounted-price">
-
-                        ${formatPrice(newPrice5)}
-
-                    </div>
-
+                    <div class="discount-label">🎉 GIẢM ${currentDiscount}%</div>
+                    <div class="original-price">${formatPrice(currentPrice5)}</div>
+                    <div class="discounted-price">${formatPrice(newPrice5)}</div>
                 </div>
-
             `;
-
         }
-
     }
 
-
-    const price7 =
-        document.querySelector(
-            "#price7 .price"
-        );
-
-
-    if (price7) {
-
-        price7.innerHTML = `
-
-            <div class="price-discount-box">
-
-                <div class="discount-label">
-
-                    🎉 GIẢM ${currentDiscount}%
-
+    if (currentPrice7 > 0) {
+        const price7 = document.querySelector("#price7 .price");
+        if (price7) {
+            price7.innerHTML = `
+                <div class="price-discount-box">
+                    <div class="discount-label">🎉 GIẢM ${currentDiscount}%</div>
+                    <div class="original-price">${formatPrice(currentPrice7)}</div>
+                    <div class="discounted-price">${formatPrice(newPrice7)}</div>
                 </div>
-
-                <div class="original-price">
-
-                    ${formatPrice(currentPrice7)}
-
-                </div>
-
-                <div class="discounted-price">
-
-                    ${formatPrice(newPrice7)}
-
-                </div>
-
-            </div>
-
-        `;
-
+            `;
+        }
     }
 
+    document.getElementById("discountPopup").style.display = "none";
+    document.getElementById("discountFloat").style.display = "none";
 
-    document.getElementById(
-        "discountPopup"
-    ).style.display =
-        "none";
+    if (!scrollToTarget) return;
 
+    const target =
+        (currentPrice5 > 0 || currentPrice7 > 0)
+        ? document.getElementById("result")
+        : document.querySelector(".form");
 
-    document.getElementById(
-        "discountFloat"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "result"
-    ).scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
+    if (target) {
+        target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
 }
 
 
@@ -3932,34 +3607,20 @@ async function calculatePrice() {
 
 
     /* =================================================
-       RESET MÃ GIẢM CŨ
+       GIỮ MÃ GIẢM ĐÃ NHẬN TRONG PHIÊN
     ================================================= */
 
-    currentDiscount = 0;
+    if (sessionStorage.getItem("discountClaimed") === "1") {
+        currentDiscount = Number(sessionStorage.getItem("discountPercent") || currentDiscount || 0);
+        const savedPhone = sessionStorage.getItem("discountPhone") || "";
+        if (savedPhone) {
+            document.getElementById("discountPhone").value = savedPhone;
+            document.getElementById("bookingPhone").value = savedPhone;
+        }
+    }
 
-
-    document.getElementById(
-        "phoneForm"
-    ).style.display =
-        "block";
-
-
-    document.getElementById(
-        "discountCodeResult"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "discountPopup"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "discountFloat"
-    ).style.display =
-        "none";
+    document.getElementById("discountPopup").style.display = "none";
+    document.getElementById("discountFloat").style.display = "none";
 
 
     /* =================================================
@@ -4093,6 +3754,10 @@ async function calculatePrice() {
     `;
 
 
+    if (currentDiscount > 0) {
+        applyDiscount(false);
+    }
+
     /* =================================================
        CUỘN ĐẾN KẾT QUẢ
     ================================================= */
@@ -4119,6 +3784,18 @@ setActiveStep(1);
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    if (sessionStorage.getItem("discountClaimed") === "1") {
+        currentDiscount = Number(sessionStorage.getItem("discountPercent") || 0);
+        const savedPhone = sessionStorage.getItem("discountPhone") || "";
+
+        if (savedPhone) {
+            document.getElementById("discountPhone").value = savedPhone;
+            document.getElementById("bookingPhone").value = savedPhone;
+        }
+    } else {
+        startDiscountPopupTimer();
+    }
+
     startActivitySimulation();
 
     const pickup = document.getElementById("pickup");
