@@ -1305,61 +1305,6 @@ select:invalid {
     50% { box-shadow: inset 0 0 0 2px rgba(255,109,0,0.28); }
 }
 
-
-/* ===== FIX POPUP + GỢI Ý ĐỊA CHỈ ===== */
-.popup-title {
-    white-space: normal !important;
-    line-height: 1.18;
-    padding-right: 20px;
-}
-.popup-title .fifty {
-    white-space: nowrap;
-}
-.popup-title-second {
-    display: block;
-    margin-top: 3px;
-    font-size: 15px;
-    color: #555;
-}
-.autocomplete-suggestions {
-    display: none;
-    position: relative;
-    margin-top: 4px;
-    border: 1px solid #dfe5e1;
-    border-radius: 10px;
-    background: #fff;
-    overflow: hidden;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.10);
-    z-index: 50;
-}
-.autocomplete-suggestions.show {
-    display: block;
-}
-.autocomplete-item {
-    padding: 11px 12px;
-    border-bottom: 1px solid #edf1ee;
-    cursor: pointer;
-    font-size: 13px;
-    line-height: 1.35;
-    color: #26342c;
-    background: #fff;
-}
-.autocomplete-item:last-child { border-bottom: 0; }
-.autocomplete-item:hover,
-.autocomplete-item:active {
-    background: #f1faf5;
-}
-.autocomplete-empty {
-    padding: 10px 12px;
-    font-size: 12px;
-    color: #6f7973;
-}
-@media (max-width:700px) {
-    .popup-title { font-size: 17px !important; }
-    .popup-title .fifty { font-size: 28px !important; }
-    .popup-title-second { font-size: 13px; }
-}
-
 </style>
 </head>
 
@@ -1388,6 +1333,12 @@ select:invalid {
     </div>
 
 </div>
+
+<button class="promo-ribbon promo-clickable" type="button" onclick="openPromoDiscount()">
+    🎁 Khách mới: ưu đãi đến <b>50% cước xe</b>
+    <span class="promo-cta">NHẬN MÃ</span>
+</button>
+
 <div class="activity-strip" id="activityStrip">
     ⚡ <b>Nhiều khách đang kiểm tra giá</b>
 </div>
@@ -1413,7 +1364,6 @@ select:invalid {
         id="pickup"
         placeholder="Ví dụ: Lý Nhân, Hà Nam"
     >
-    <div id="pickupSuggestions" class="autocomplete-suggestions"></div>
 
 
     <label>
@@ -1425,7 +1375,6 @@ select:invalid {
         id="destination"
         placeholder="Ví dụ: Hà Nội"
     >
-    <div id="destinationSuggestions" class="autocomplete-suggestions"></div>
 
 
     <div class="row">
@@ -1685,8 +1634,11 @@ select:invalid {
     <div id="phoneForm">
 
         <div class="popup-title">
-            🎁 KHÁCH MỚI GIẢM ĐẾN <span class="fifty">50%</span>
-            <span class="popup-title-second">GIÁ CƯỚC</span>
+
+            🎁 KHÁCH MỚI GIẢM đến
+            <span class="fifty">50%</span>
+            giá cước
+
         </div>
 
 
@@ -1950,45 +1902,51 @@ function invalidateRouteDistance() {
     }
 }
 
-async function requestRouteFromBackend(pickup, destination) {
-    const pickupEl = document.getElementById("pickup");
-    const destinationEl = document.getElementById("destination");
+function requestRouteFromBackend(pickup, destination) {
+    return new Promise(function(resolve, reject) {
+        const callbackName =
+            "__routeCallback_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
 
-    const params = new URLSearchParams({
-        pickup: pickup,
-        destination: destination
+        let script = null;
+        let finished = false;
+
+        const timer = setTimeout(function() {
+            cleanup();
+            reject(new Error("Hết thời gian chờ tính quãng đường."));
+        }, 15000);
+
+        function cleanup() {
+            if (finished) return;
+            finished = true;
+            clearTimeout(timer);
+            try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+        }
+
+        window[callbackName] = function(data) {
+            cleanup();
+            if (data && data.ok) {
+                resolve(data);
+            } else {
+                reject(new Error(data && data.error ? data.error : "Không tính được quãng đường."));
+            }
+        };
+
+        script = document.createElement("script");
+        script.src =
+            GOOGLE_SCRIPT_URL +
+            "?action=route" +
+            "&pickup=" + encodeURIComponent(pickup) +
+            "&destination=" + encodeURIComponent(destination) +
+            "&callback=" + encodeURIComponent(callbackName) +
+            "&_=" + Date.now();
+        script.async = true;
+        script.onerror = function() {
+            cleanup();
+            reject(new Error("Không kết nối được máy chủ tính quãng đường."));
+        };
+        document.head.appendChild(script);
     });
-
-    if (pickupEl && pickupEl.dataset.placeId) {
-        params.set("pickupPlaceId", pickupEl.dataset.placeId);
-    }
-
-    if (destinationEl && destinationEl.dataset.placeId) {
-        params.set("destinationPlaceId", destinationEl.dataset.placeId);
-    }
-
-    const response = await fetch("/api/route?" + params.toString(), {
-        method: "GET",
-        headers: { "Accept": "application/json" }
-    });
-
-    let data = null;
-
-    try {
-        data = await response.json();
-    } catch (error) {
-        throw new Error("Máy chủ tính quãng đường trả dữ liệu không hợp lệ.");
-    }
-
-    if (!response.ok || !data || !data.ok) {
-        throw new Error(
-            data && data.error
-                ? data.error
-                : "Không tính được quãng đường."
-        );
-    }
-
-    return data;
 }
 
 async function calculateRouteDistance(showAlertOnError) {
@@ -2009,7 +1967,7 @@ async function calculateRouteDistance(showAlertOnError) {
 
         const result = await requestRouteFromBackend(pickup, destination);
         const km = Number(result.km || 0);
-        const minutes = Number(result.minutes || result.durationMinutes || 0);
+        const minutes = Number(result.minutes || 0);
 
         if (!km || km <= 0) {
             throw new Error("Quãng đường trả về không hợp lệ.");
@@ -2044,106 +2002,6 @@ async function calculateRouteDistance(showAlertOnError) {
         return 0;
     }
 }
-
-
-let pickupAutocompleteTimer = null;
-let destinationAutocompleteTimer = null;
-
-function hideSuggestions(id) {
-    const box = document.getElementById(id);
-    if (!box) return;
-    box.classList.remove("show");
-    box.innerHTML = "";
-}
-
-async function loadAddressSuggestions(inputId, boxId, timerName) {
-    const input = document.getElementById(inputId);
-    const box = document.getElementById(boxId);
-
-    if (!input || !box) return;
-
-    const query = input.value.trim();
-
-    // Người dùng sửa text thì placeId cũ không còn đáng tin.
-    input.dataset.placeId = "";
-
-    if (query.length < 3) {
-        hideSuggestions(boxId);
-        return;
-    }
-
-    try {
-        const response = await fetch(
-            "/api/places?q=" + encodeURIComponent(query),
-            { headers: { "Accept": "application/json" } }
-        );
-
-        const data = await response.json();
-
-        if (!response.ok || !data.ok) {
-            hideSuggestions(boxId);
-            return;
-        }
-
-        const items = Array.isArray(data.suggestions) ? data.suggestions : [];
-
-        if (!items.length) {
-            box.innerHTML = '<div class="autocomplete-empty">Không tìm thấy địa chỉ phù hợp.</div>';
-            box.classList.add("show");
-            return;
-        }
-
-        box.innerHTML = "";
-
-        items.forEach(function(item) {
-            const row = document.createElement("div");
-            row.className = "autocomplete-item";
-            row.textContent = item.text;
-
-            row.addEventListener("mousedown", function(event) {
-                event.preventDefault();
-                input.value = item.text;
-                input.dataset.placeId = item.placeId || "";
-                hideSuggestions(boxId);
-                invalidateRouteDistance();
-
-                const pickup = document.getElementById("pickup");
-                const destination = document.getElementById("destination");
-
-                if (
-                    pickup && destination &&
-                    pickup.value.trim() &&
-                    destination.value.trim()
-                ) {
-                    calculateRouteDistance(false);
-                }
-            });
-
-            box.appendChild(row);
-        });
-
-        box.classList.add("show");
-
-    } catch (error) {
-        console.error("Places autocomplete error:", error);
-        hideSuggestions(boxId);
-    }
-}
-
-function scheduleAddressSuggestions(inputId, boxId, which) {
-    if (which === "pickup") {
-        clearTimeout(pickupAutocompleteTimer);
-        pickupAutocompleteTimer = setTimeout(function() {
-            loadAddressSuggestions(inputId, boxId, "pickup");
-        }, 320);
-    } else {
-        clearTimeout(destinationAutocompleteTimer);
-        destinationAutocompleteTimer = setTimeout(function() {
-            loadAddressSuggestions(inputId, boxId, "destination");
-        }, 320);
-    }
-}
-
 
 function shareFacebook() {
     const url = "https://www.facebook.com/sharer/sharer.php?u=" +
@@ -2730,7 +2588,6 @@ tripTypeElement.addEventListener("change", function() {
         }
 
     });
-}
 
 
 /* =====================================================
@@ -4285,10 +4142,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const savedPhone = sessionStorage.getItem("discountPhone") || "";
         if (savedPhone) {
-            const discountPhone = document.getElementById("discountPhone");
-            const bookingPhone = document.getElementById("bookingPhone");
-            if (discountPhone) discountPhone.value = savedPhone;
-            if (bookingPhone) bookingPhone.value = savedPhone;
+            document.getElementById("discountPhone").value = savedPhone;
+            document.getElementById("bookingPhone").value = savedPhone;
         }
     } else {
         startDiscountPopupTimer();
@@ -4297,44 +4152,23 @@ document.addEventListener("DOMContentLoaded", function() {
     const pickup = document.getElementById("pickup");
     const destination = document.getElementById("destination");
 
-    if (pickup) {
-        pickup.addEventListener("input", function() {
-            invalidateRouteDistance();
-            scheduleAddressSuggestions("pickup", "pickupSuggestions", "pickup");
-        });
-
-        pickup.addEventListener("focus", function() {
-            if (pickup.value.trim().length >= 3) {
-                scheduleAddressSuggestions("pickup", "pickupSuggestions", "pickup");
-            }
-        });
+    if (pickup && destination) {
+        pickup.addEventListener("input", invalidateRouteDistance);
+        destination.addEventListener("input", invalidateRouteDistance);
 
         pickup.addEventListener("blur", function() {
-            setTimeout(function() {
-                hideSuggestions("pickupSuggestions");
-            }, 180);
-        });
-    }
-
-    if (destination) {
-        destination.addEventListener("input", function() {
-            invalidateRouteDistance();
-            scheduleAddressSuggestions("destination", "destinationSuggestions", "destination");
-        });
-
-        destination.addEventListener("focus", function() {
-            if (destination.value.trim().length >= 3) {
-                scheduleAddressSuggestions("destination", "destinationSuggestions", "destination");
+            if (pickup.value.trim() && destination.value.trim()) {
+                calculateRouteDistance(false);
             }
         });
-
         destination.addEventListener("blur", function() {
-            setTimeout(function() {
-                hideSuggestions("destinationSuggestions");
-            }, 180);
+            if (pickup.value.trim() && destination.value.trim()) {
+                calculateRouteDistance(false);
+            }
         });
     }
 });
+}
 
 </script>
 
