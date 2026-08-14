@@ -1292,7 +1292,7 @@ select:invalid {
 .promo-clickable:active { transform: scale(0.99); }
 .promo-cta {
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 6px;
     padding: 3px 8px;
     border-radius: 999px;
     background: #ff6d00;
@@ -1333,6 +1333,283 @@ select:invalid {
     </div>
 
 </div>
+
+<button class="promo-ribbon promo-clickable" type="button" onclick="openPromoDiscount()">
+    🎁 Khách mới: ưu đãi đến <b>50% cước xe</b>
+    <span class="promo-cta">NHẬN MÃ</span>
+</button>
+
+<div class="activity-strip" id="activityStrip">
+    ⚡ <b>Nhiều khách đang kiểm tra giá</b>
+</div>
+
+
+<!-- =====================================================
+     FORM
+===================================================== -->
+
+<div class="form">
+
+    <div class="section-title">
+        📋 Nhập thông tin chuyến đi
+    </div>
+
+
+    <label>
+        Điểm đón <span class="required">*</span>
+    </label>
+
+    <input
+        type="text"
+        id="pickup"
+        placeholder="Ví dụ: Lý Nhân, Hà Nam"
+    >
+
+
+    <label>
+        Điểm đến <span class="required">*</span>
+    </label>
+
+    <input
+        type="text"
+        id="destination"
+        placeholder="Ví dụ: Hà Nội"
+    >
+
+
+    <div class="row">
+
+        <div>
+
+            <label>
+                Số người <span class="required">*</span>
+            </label>
+
+            <select id="passengers">
+
+                <option value="">
+                    -- Chọn số người --
+                </option>
+
+                <option value="1">1 người</option>
+                <option value="2">2 người</option>
+                <option value="3">3 người</option>
+                <option value="4">4 người</option>
+                <option value="5">5 người</option>
+                <option value="6">6 người</option>
+
+            </select>
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Loại chuyến <span class="required">*</span>
+            </label>
+
+            <select id="tripType">
+
+                <option value="">
+                    -- Chọn --
+                </option>
+
+                <option value="oneway">
+                    1 chiều
+                </option>
+
+                <option value="roundtrip">
+                    2 chiều
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <label>
+        Thời gian đi <span class="required">*</span>
+    </label>
+
+    <select id="timeType">
+
+        <option value="">
+            -- Chọn ban ngày / ban đêm --
+        </option>
+
+        <option value="day">
+            ☀️ Đi ban ngày
+        </option>
+
+        <option value="night">
+            🌙 Đi ban đêm (+50.000đ/chuyến)
+        </option>
+
+    </select>
+
+
+    <label>
+        Ngày đi <span class="required">*</span>
+    </label>
+
+    <input
+        type="date"
+        id="travelDate"
+    >
+
+
+    <input type="hidden" id="km" value="">
+
+    <div id="routeAutoBox" class="route-auto-box">
+        🗺️ Nhập điểm đón và điểm đến. Hệ thống sẽ tự tính quãng đường bằng Google Maps.
+    </div>
+    <div id="mapApiWarning" class="map-api-warning"></div>
+
+
+    <div id="waitingSection">
+
+        <label>
+            Thời gian chờ <span class="required">*</span>
+        </label>
+
+        <select id="waiting">
+
+            <option value="">
+                -- Chọn thời gian chờ --
+            </option>
+
+            <option value="0">
+                Không chờ
+            </option>
+
+            <option value="1">
+                Chờ 1 tiếng (miễn phí)
+            </option>
+
+            <option value="2">
+                Chờ 2 tiếng (miễn phí)
+            </option>
+
+            <option value="3">
+                Chờ 3 tiếng (miễn phí)
+            </option>
+
+            <option value="4">
+                Chờ 4 tiếng (+50.000đ)
+            </option>
+
+            <option value="5">
+                Chờ 5 tiếng (+100.000đ)
+            </option>
+
+            <option value="6">
+                Chờ 6 tiếng (+150.000đ)
+            </option>
+
+            <option value="7">
+                Chờ 7 tiếng (+200.000đ)
+            </option>
+
+            <option value="8">
+                Chờ 8 tiếng (+250.000đ)
+            </option>
+
+        </select>
+
+        <div class="field-help waiting-help">
+            🎁 Miễn phí 03 tiếng chờ đầu tiên. Từ tiếng thứ 4 tính 50.000đ/tiếng.
+        </div>
+
+    </div>
+
+
+    <button
+        class="main-button"
+        onclick="calculatePrice()"
+    >
+        🧮 XEM GIÁ THAM KHẢO
+    </button>
+
+
+    <div class="note">
+
+        💡 Giá cước hiển thị là giá tham khảo.
+
+        Giá đã bao gồm các phụ thu được lựa chọn
+        trong thông tin chuyến đi.
+
+        <br><br>
+
+        🎁 Miễn phí 03 tiếng chờ đầu tiên; từ tiếng thứ 4 tính 50.000đ/tiếng.
+
+        <br><br>
+
+        🚧 Phí cầu đường và phí đón sân bay
+        phát sinh theo thực tế.
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     KẾT QUẢ
+===================================================== -->
+
+<div id="result">
+
+    <div class="result-title">
+        💰 Giá cước dự kiến
+    </div>
+
+    <div class="result-subtitle">
+        Chọn gói phù hợp, nhập số điện thoại và nhân viên sẽ xác nhận trong 10 phút.
+    </div>
+
+
+    <div
+        id="surchargeNotice"
+        class="surcharge-notice"
+    ></div>
+
+
+    <div id="price5"></div>
+
+
+    <div id="price7"></div>
+
+
+    <div
+        id="warningBox"
+        class="warning"
+    ></div>
+
+
+    <div class="success">
+
+        <b>✅ Không cần thanh toán trước.</b><br>
+        Nhân viên sẽ gọi xác nhận lịch trình và giá cuối cùng.
+
+        <a class="inline-call" href="tel:0869017368">
+            📞 Gọi ngay 0869.017.368
+        </a>
+
+        <div class="social-actions">
+            <a class="social-btn zalo" href="https://zalo.me/0869017368" target="_blank" rel="noopener">
+                💬 Nhắn Zalo
+            </a>
+            <a class="social-btn facebook" href="#" onclick="shareFacebook(); return false;">
+                📘 Chia sẻ Facebook
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
 
 </div>
 
@@ -1759,7 +2036,6 @@ function startActivitySimulation() {
     render();
     setInterval(render, 6500);
 }
-
 
 /* =====================================================
    LÀM TRÒN GIÁ
@@ -2265,9 +2541,10 @@ function showBookingSuccess() {
    HIỆN / ẨN THỜI GIAN CHỜ
 ===================================================== */
 
-document
-    .getElementById("tripType")
-    .addEventListener("change", function() {
+const tripTypeElement = document.getElementById("tripType");
+
+if (tripTypeElement) {
+tripTypeElement.addEventListener("change", function() {
 
         const waitingSection =
             document.getElementById(
@@ -2801,10 +3078,10 @@ function generateDiscount() {
     const highTier = Math.random() < 0.70;
 
     if (highTier) {
-        return 30 + Math.floor(Math.random() * 21); // 30–50
+        return 30 + Math.floor(Math.random() * 21);
     }
 
-    return 10 + Math.floor(Math.random() * 20); // 10–29
+    return 10 + Math.floor(Math.random() * 20);
 }
 
 
@@ -2828,6 +3105,7 @@ function startDiscountPopupTimer() {
         if (
             currentDiscount === 0 &&
             sessionStorage.getItem("discountClaimed") !== "1" &&
+            popup &&
             popup.style.display !== "block"
         ) {
             popup.style.display = "block";
@@ -2836,17 +3114,13 @@ function startDiscountPopupTimer() {
 }
 
 
-
 function openPromoDiscount() {
     if (sessionStorage.getItem("discountClaimed") === "1") {
-        const savedDiscount = Number(sessionStorage.getItem("discountPercent") || 0);
-        const savedPhone = sessionStorage.getItem("discountPhone") || "";
+        currentDiscount = Number(sessionStorage.getItem("discountPercent") || 0);
 
-        if (savedDiscount > 0) currentDiscount = savedDiscount;
+        const savedPhone = sessionStorage.getItem("discountPhone") || "";
         if (savedPhone) {
-            const phoneInput = document.getElementById("discountPhone");
             const bookingPhone = document.getElementById("bookingPhone");
-            if (phoneInput) phoneInput.value = savedPhone;
             if (bookingPhone) bookingPhone.value = savedPhone;
         }
 
@@ -2857,6 +3131,7 @@ function openPromoDiscount() {
 
     openDiscountPopup();
 }
+
 
 /* =====================================================
    ĐÓNG POPUP GIẢM GIÁ
@@ -2953,64 +3228,136 @@ async function getDiscountCode() {
    ÁP MÃ GIẢM GIÁ
 ===================================================== */
 
-function applyDiscount(scrollToTarget) {
-    if (scrollToTarget === undefined) {
-        scrollToTarget = true;
+function applyDiscount() {
+
+    if (
+        currentDiscount <= 0
+    ) {
+
+        return;
+
     }
 
-    if (currentDiscount <= 0) return;
-
-    sessionStorage.setItem("discountClaimed", "1");
-    sessionStorage.setItem("discountPercent", String(currentDiscount));
 
     const newPrice5 =
-        roundPrice(currentPrice5 * (1 - currentDiscount / 100));
+        roundPrice(
+            currentPrice5 *
+            (
+                1 -
+                currentDiscount / 100
+            )
+        );
+
 
     const newPrice7 =
-        roundPrice(currentPrice7 * (1 - currentDiscount / 100));
+        roundPrice(
+            currentPrice7 *
+            (
+                1 -
+                currentDiscount / 100
+            )
+        );
 
-    if (currentPrice5 > 0) {
-        const price5 = document.querySelector("#price5 .price");
+
+    if (
+        currentPrice5 > 0
+    ) {
+
+        const price5 =
+            document.querySelector(
+                "#price5 .price"
+            );
+
+
         if (price5) {
+
             price5.innerHTML = `
+
                 <div class="price-discount-box">
-                    <div class="discount-label">🎉 GIẢM ${currentDiscount}%</div>
-                    <div class="original-price">${formatPrice(currentPrice5)}</div>
-                    <div class="discounted-price">${formatPrice(newPrice5)}</div>
+
+                    <div class="discount-label">
+
+                        🎉 GIẢM ${currentDiscount}%
+
+                    </div>
+
+                    <div class="original-price">
+
+                        ${formatPrice(currentPrice5)}
+
+                    </div>
+
+                    <div class="discounted-price">
+
+                        ${formatPrice(newPrice5)}
+
+                    </div>
+
                 </div>
+
             `;
+
         }
+
     }
 
-    if (currentPrice7 > 0) {
-        const price7 = document.querySelector("#price7 .price");
-        if (price7) {
-            price7.innerHTML = `
-                <div class="price-discount-box">
-                    <div class="discount-label">🎉 GIẢM ${currentDiscount}%</div>
-                    <div class="original-price">${formatPrice(currentPrice7)}</div>
-                    <div class="discounted-price">${formatPrice(newPrice7)}</div>
+
+    const price7 =
+        document.querySelector(
+            "#price7 .price"
+        );
+
+
+    if (price7) {
+
+        price7.innerHTML = `
+
+            <div class="price-discount-box">
+
+                <div class="discount-label">
+
+                    🎉 GIẢM ${currentDiscount}%
+
                 </div>
-            `;
-        }
+
+                <div class="original-price">
+
+                    ${formatPrice(currentPrice7)}
+
+                </div>
+
+                <div class="discounted-price">
+
+                    ${formatPrice(newPrice7)}
+
+                </div>
+
+            </div>
+
+        `;
+
     }
 
-    document.getElementById("discountPopup").style.display = "none";
-    document.getElementById("discountFloat").style.display = "none";
 
-    if (!scrollToTarget) return;
+    document.getElementById(
+        "discountPopup"
+    ).style.display =
+        "none";
 
-    const target =
-        (currentPrice5 > 0 || currentPrice7 > 0)
-        ? document.getElementById("result")
-        : document.querySelector(".form");
 
-    if (target) {
-        target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-    }
+    document.getElementById(
+        "discountFloat"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "result"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
 }
 
 
@@ -3611,7 +3958,10 @@ async function calculatePrice() {
     ================================================= */
 
     if (sessionStorage.getItem("discountClaimed") === "1") {
-        currentDiscount = Number(sessionStorage.getItem("discountPercent") || currentDiscount || 0);
+        currentDiscount = Number(
+            sessionStorage.getItem("discountPercent") || currentDiscount || 0
+        );
+
         const savedPhone = sessionStorage.getItem("discountPhone") || "";
         if (savedPhone) {
             document.getElementById("discountPhone").value = savedPhone;
@@ -3755,8 +4105,9 @@ async function calculatePrice() {
 
 
     if (currentDiscount > 0) {
-        applyDiscount(false);
+        applyDiscount();
     }
+
 
     /* =================================================
        CUỘN ĐẾN KẾT QUẢ
@@ -3784,10 +4135,12 @@ setActiveStep(1);
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    startActivitySimulation();
+
     if (sessionStorage.getItem("discountClaimed") === "1") {
         currentDiscount = Number(sessionStorage.getItem("discountPercent") || 0);
-        const savedPhone = sessionStorage.getItem("discountPhone") || "";
 
+        const savedPhone = sessionStorage.getItem("discountPhone") || "";
         if (savedPhone) {
             document.getElementById("discountPhone").value = savedPhone;
             document.getElementById("bookingPhone").value = savedPhone;
@@ -3795,8 +4148,6 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         startDiscountPopupTimer();
     }
-
-    startActivitySimulation();
 
     const pickup = document.getElementById("pickup");
     const destination = document.getElementById("destination");
@@ -3817,6 +4168,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+}
 
 </script>
 
