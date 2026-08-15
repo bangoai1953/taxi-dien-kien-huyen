@@ -1204,7 +1204,36 @@ select:invalid {
     font-size: 13px; line-height: 1.45;
 }
 .route-auto-box.loading { background:#fff8e7; border-color:#ffe0a3; color:#8b6200; }
-.route-auto-box.success { background:#eafff2; border-color:#bfe9cf; color:#087f42; font-weight:700; }
+.route-auto-box.success {
+    background:#fff8f6;
+    border:2px solid #ffb6a8;
+    color:#424a45;
+    font-weight:700;
+    box-shadow:0 4px 14px rgba(190,35,20,0.08);
+}
+.route-auto-box.success .route-label {
+    display:block;
+    color:#226b43;
+    font-size:12px;
+    margin-bottom:3px;
+}
+.route-auto-box.success .route-km {
+    color:#d92d20;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:-0.3px;
+}
+.route-auto-box.success .route-time {
+    color:#5d665f;
+    font-size:12px;
+    font-weight:700;
+}
+.route-auto-box.success small {
+    display:block;
+    margin-top:3px;
+    color:#68736c;
+    font-weight:500;
+}
 .route-auto-box.error { background:#fff1f1; border-color:#ffc7c7; color:#b3261e; }
 .social-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:12px; }
 .social-btn {
@@ -1427,6 +1456,13 @@ select:invalid {
     >
     <div id="destinationSuggestions" class="autocomplete-suggestions"></div>
 
+    <input type="hidden" id="km" value="">
+
+    <div id="routeAutoBox" class="route-auto-box">
+        🗺️ Nhập điểm đón và điểm đến. Hệ thống sẽ tự tính quãng đường.
+    </div>
+    <div id="mapApiWarning" class="map-api-warning"></div>
+
 
     <div class="row">
 
@@ -1510,14 +1546,6 @@ select:invalid {
         type="date"
         id="travelDate"
     >
-
-
-    <input type="hidden" id="km" value="">
-
-    <div id="routeAutoBox" class="route-auto-box">
-        🗺️ Nhập điểm đón và điểm đến. Hệ thống sẽ tự tính quãng đường bằng Google Maps.
-    </div>
-    <div id="mapApiWarning" class="map-api-warning"></div>
 
 
     <div id="waitingSection">
@@ -2021,9 +2049,10 @@ async function calculateRouteDistance(showAlertOnError) {
 
         box.className = "route-auto-box success";
         box.innerHTML =
-            "✅ Quãng đường Google Maps: <b>" + km + " km</b>" +
-            (minutes ? " · khoảng " + minutes + " phút" : "") +
-            "<br><small>Giá cước sẽ tính theo quãng đường này.</small>";
+            '<span class="route-label">✅ Quãng đường dự kiến</span>' +
+            '<span class="route-km">' + km + ' KM</span>' +
+            (minutes ? '<span class="route-time"> · khoảng ' + minutes + ' phút</span>' : '') +
+            '<small>Giá cước sẽ tính theo quãng đường này.</small>';
 
         return km;
     } catch (error) {
